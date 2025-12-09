@@ -70,6 +70,14 @@
             transform: translateY(-2px);
         }
 
+        .btn-sm {
+            padding: 6px 10px !important;
+            font-size: 14px !important;
+            line-height: 1 !important;
+            white-space: nowrap !important;
+            border-radius: 10px !important;
+        }
+
         .nav-link {
             position: relative;
             transition: color 0.18s ease;
@@ -1048,103 +1056,101 @@
 
             <!-- CENTERS LIST PAGE -->
             <section id="page-centers" class="page-section">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                     <div class="text-center mb-8">
                         <h1 class="text-3xl font-bold text-gray-900">Danh sách Trung tâm</h1>
                         <p class="text-gray-600">Duyệt toàn bộ trung tâm, lọc và so sánh</p>
                     </div>
-                    <div class="grid lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2 space-y-6">
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <input type="text" placeholder="Tìm trung tâm, quận..."
-                                            class="px-4 py-3 border rounded-lg w-80">
-                                        <select class="px-4 py-3 border rounded-lg">
-                                            <option>Thành phố</option>
-                                            <option>Hà Nội</option>
-                                            <option>TP.HCM</option>
-                                        </select>
-                                    </div>
-                                    <div class="flex items-center space-x-3">
-                                        <button class="btn-secondary" onclick="navigateTo('map')">Xem trên bản
-                                            đồ</button>
-                                        <button class="btn-primary"
-                                            onclick="document.getElementById('compare-panel').scrollIntoView({behavior:'smooth'})">So
-                                            sánh</button>
-                                    </div>
+
+                    <!-- Top controls: search (wide) on left, actions on right -->
+                    <div class="flex items-start justify-between mb-3 gap-4">
+                        <input id="centers-search-input" type="text" placeholder="Tìm kiếm theo tên"
+                            class="flex-1 px-4 py-3 border rounded-lg shadow-sm" />
+                        <div class="flex items-center space-x-3">
+                            <button class="btn-secondary btn-sm" onclick="navigateTo('map')">Xem trên bản đồ</button>
+                            <button class="btn-primary btn-sm"
+                                onclick="document.getElementById('compare-panel').scrollIntoView({behavior:'smooth'})">So
+                                sánh</button>
+                        </div>
+                    </div>
+
+                    <!-- Second row: selects -->
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <select id="centers-filter-city" class="px-4 py-2 border rounded-lg">
+                            <option value="all">Tất cả thành phố</option>
+                            <option value="hn">Hà Nội</option>
+                            <option value="hcm">TP.HCM</option>
+                            <option value="dn">Đà Nẵng</option>
+                        </select>
+                        <select id="centers-filter-price" class="px-4 py-2 border rounded-lg">
+                            <option value="all">Học phí: Tất cả</option>
+                            <option value="under3">Dưới 3.000.000đ</option>
+                            <option value="3to6">3.000.000 - 6.000.000đ</option>
+                            <option value="6to10">6.000.000 - 10.000.000đ</option>
+                            <option value="above10">Trên 10.000.000đ</option>
+                        </select>
+                        <select id="centers-filter-distance" class="px-4 py-2 border rounded-lg">
+                            <option value="any">Khoảng cách: Bất kỳ</option>
+                            <option value="near">Gần nhất (&lt;1km)</option>
+                            <option value="3km">Trong 3 km</option>
+                            <option value="5km">Trong 5 km</option>
+                            <option value="far">Trên 5 km</option>
+                        </select>
+                    </div>
+
+                    <!-- Centers list -->
+                    <div id="centers-list" class="space-y-6">
+                        <!-- sample card (JS renderer will replace with real data) -->
+                        <div class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition">
+                            <div class="flex items-start justify-between gap-6">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-900">Trung tâm Hán Ngữ Thăng Long</h4>
+                                    <div class="text-sm text-gray-600 mt-1">123 Nguyễn Huệ, Q.1, TP.HCM • <span
+                                            class="rating-star">⭐ 4.8</span></div>
+                                    <div class="text-blue-600 font-semibold mt-3">Từ 1.500.000đ/tháng</div>
                                 </div>
-                                <div id="centers-list" class="space-y-4">
-                                    <!-- Example center item -->
-                                    <div
-                                        class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition flex items-start justify-between">
-                                        <div>
-                                            <h4 class="font-bold text-gray-900">Trung tâm Hán Ngữ Thăng Long</h4>
-                                            <div class="text-sm text-gray-600">123 Nguyễn Huệ, Q.1, TP.HCM • <span
-                                                    class="rating-star">⭐ 4.8</span></div>
-                                            <div class="text-blue-600 font-semibold mt-2">Từ 1.500.000đ/tháng</div>
-                                        </div>
-                                        <div class="flex flex-col gap-2 w-40">
-                                            <button class="btn-secondary"
-                                                onclick="openCenterDetail('Trung tâm Hán Ngữ Thăng Long')">Chi
-                                                tiết</button>
-                                            <button class="btn-primary"
-                                                onclick="addToCompare('Trung tâm Hán Ngữ Thăng Long')">So sánh</button>
-                                        </div>
-                                    </div>
-                                    <!-- More items can be generated dynamically -->
-                                </div>
-                            </div>
-                            <!-- Comparison panel moved to bottom of list -->
-                            <div id="compare-panel" class="mt-8 bg-white rounded-2xl shadow-xl p-8">
-                                <h3 class="text-xl font-bold mb-4">So sánh nhanh trung tâm</h3>
-                                <div class="grid md:grid-cols-3 gap-4 mb-6"><select class="px-4 py-3 border rounded-lg">
-                                        <option>Chọn trung tâm 1</option>
-                                    </select> <select class="px-4 py-3 border rounded-lg">
-                                        <option>Chọn trung tâm 2</option>
-                                    </select> <select class="px-4 py-3 border rounded-lg">
-                                        <option>Chọn trung tâm 3</option>
-                                    </select></div>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full">
-                                        <thead>
-                                            <tr class="border-b-2 border-gray-200">
-                                                <th class="text-left py-4 px-4 font-bold">Tiêu chí</th>
-                                                <th class="text-center py-4 px-4 font-bold">Trung tâm 1</th>
-                                                <th class="text-center py-4 px-4 font-bold">Trung tâm 2</th>
-                                                <th class="text-center py-4 px-4 font-bold">Trung tâm 3</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="border-b border-gray-100">
-                                                <td class="py-4 px-4 font-medium">Học phí (từ)</td>
-                                                <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.500.000đ
-                                                </td>
-                                                <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.800.000đ
-                                                </td>
-                                                <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.200.000đ
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="w-40 flex flex-col items-end gap-3">
+                                    <button class="btn-secondary btn-sm">Chi tiết</button>
+                                    <button class="btn-primary btn-sm">Xem trên bản đồ</button>
                                 </div>
                             </div>
                         </div>
-                        <aside class="space-y-6">
-                            <div class="bg-white rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-bold text-gray-900 mb-4">Bộ lọc</h3>
-                                <div class="space-y-3"><label class="text-sm">Thành phố</label><select
-                                        class="w-full px-3 py-2 border rounded-lg">
-                                        <option>Tất cả</option>
-                                    </select></div>
-                                <div class="space-y-3"><label class="text-sm">Học phí</label><input type="range"
-                                        class="w-full" min="0" max="5000000"></div>
-                            </div>
-                            <div class="bg-white rounded-2xl p-6 shadow-lg">
-                                <h3 class="font-bold text-gray-900 mb-4">Trung tâm gần bạn</h3>
-                                <div class="text-sm text-gray-600">Hiển thị các trung tâm gần vị trí của bạn</div>
-                            </div>
-                        </aside>
+                    </div>
+
+                    <!-- Comparison panel -->
+                    <div id="compare-panel" class="mt-8 bg-white rounded-2xl shadow-xl p-8">
+                        <h3 class="text-xl font-bold mb-4">So sánh nhanh trung tâm</h3>
+                        <div class="grid md:grid-cols-3 gap-4 mb-6">
+                            <select class="px-4 py-3 border rounded-lg">
+                                <option>Chọn trung tâm 1</option>
+                            </select>
+                            <select class="px-4 py-3 border rounded-lg">
+                                <option>Chọn trung tâm 2</option>
+                            </select>
+                            <select class="px-4 py-3 border rounded-lg">
+                                <option>Chọn trung tâm 3</option>
+                            </select>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b-2 border-gray-200">
+                                        <th class="text-left py-4 px-4 font-bold">Tiêu chí</th>
+                                        <th class="text-center py-4 px-4 font-bold">Trung tâm 1</th>
+                                        <th class="text-center py-4 px-4 font-bold">Trung tâm 2</th>
+                                        <th class="text-center py-4 px-4 font-bold">Trung tâm 3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-4 px-4 font-medium">Học phí (từ)</td>
+                                        <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.500.000đ</td>
+                                        <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.800.000đ</td>
+                                        <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.200.000đ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -2051,26 +2057,76 @@
         }
 
         // Safe renderers (only run if target containers exist)
-        function renderFakeCentersList(selector = '#centers-list') {
+        function renderFakeCentersList(selector = '#centers-list', page = 1, perPage = 6) {
             const container = document.querySelector(selector);
             if (!container) return;
             container.innerHTML = '';
-            FAKE_CENTERS.forEach(c => {
-                const el = document.createElement('div');
-                el.className = 'bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition flex items-start justify-between';
-                el.innerHTML = `
-                        <div>
-                            <h4 class="font-bold text-gray-900">${c.name}</h4>
-                            <div class="text-sm text-gray-600">${c.address} • <span class="rating-star">⭐ ${c.rating}</span></div>
-                            <div class="text-blue-600 font-semibold mt-2">Từ ${formatVND(c.price_from)}/tháng</div>
-                        </div>
-                        <div class="flex flex-col gap-2 w-40">
-                            <button class="btn-secondary" onclick="openCenterDetail('${c.name.replace(/'/g, '\\\'')}')">Chi tiết</button>
-                            <button class="btn-primary" onclick="openGoogleMaps('${c.address.replace(/'/g, "\\'")}')">Xem trên bản đồ</button>
-                        </div>
-                    `;
-                container.appendChild(el);
+
+            const total = FAKE_CENTERS.length;
+            const totalPages = Math.max(1, Math.ceil(total / perPage));
+            page = Math.min(Math.max(1, page), totalPages);
+
+            function buildPager(current) {
+                const wrap = document.createElement('div');
+                wrap.className = 'flex items-center gap-2';
+
+                const prev = document.createElement('button');
+                prev.className = 'px-3 py-1 border rounded-md';
+                prev.textContent = '‹';
+                prev.disabled = current === 1;
+                prev.onclick = () => renderFakeCentersList(selector, current - 1, perPage);
+                wrap.appendChild(prev);
+
+                const start = Math.max(1, Math.min(current - 2, totalPages - 4));
+                const end = Math.min(totalPages, start + 4);
+                for (let i = start; i <= end; i++) {
+                    const b = document.createElement('button');
+                    b.className = i === current ? 'px-3 py-1 bg-blue-600 text-white rounded-md' : 'px-3 py-1 border rounded-md';
+                    b.textContent = i;
+                    if (i !== current) b.onclick = () => renderFakeCentersList(selector, i, perPage);
+                    wrap.appendChild(b);
+                }
+
+                const next = document.createElement('button');
+                next.className = 'px-3 py-1 border rounded-md';
+                next.textContent = '›';
+                next.disabled = current === totalPages;
+                next.onclick = () => renderFakeCentersList(selector, current + 1, perPage);
+                wrap.appendChild(next);
+
+                return wrap;
+            }
+
+            // grid container: 2 columns x rows
+            const grid = document.createElement('div');
+            grid.className = 'grid gap-6 sm:grid-cols-1 md:grid-cols-2';
+
+            const startIdx = (page - 1) * perPage;
+            const slice = FAKE_CENTERS.slice(startIdx, startIdx + perPage);
+            slice.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition flex items-start justify-between';
+                card.innerHTML = `
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-900">${c.name}</h4>
+                        <div class="text-sm text-gray-600 mt-1">${c.address} • <span class="rating-star">⭐ ${c.rating}</span></div>
+                        <div class="text-blue-600 font-semibold mt-3">Từ ${formatVND(c.price_from)}/tháng</div>
+                    </div>
+                    <div class="w-40 flex flex-col items-end gap-3">
+                        <button class="btn-secondary btn-sm" onclick="openCenterDetail('${c.name.replace(/'/g, "\\'")}')">Chi tiết</button>
+                        <button class="btn-primary btn-sm " onclick="openGoogleMaps('${c.address.replace(/'/g, "\\'")}')">Xem trên bản đồ</button>
+                    </div>
+                `;
+                grid.appendChild(card);
             });
+
+            container.appendChild(grid);
+
+            // pagination
+            const pagerWrap = document.createElement('div');
+            pagerWrap.className = 'mt-6 flex justify-center';
+            pagerWrap.appendChild(buildPager(page));
+            container.appendChild(pagerWrap);
         }
 
         function renderFakeMapResults() {
