@@ -1,0 +1,2375 @@
+<!doctype html>
+<html lang="vi" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung Tâm Tiếng Trung Finder</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .card-hover {
+            transition: all 0.18s ease;
+        }
+
+        .card-hover:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(37, 169, 224, 0.15);
+        }
+
+        .btn-primary {
+            background: #25A9E0;
+            color: white;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-weight: 600;
+            transition: all 0.18s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #1EA7F2;
+            box-shadow: 0 6px 16px rgba(37, 169, 224, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #25A9E0;
+            border: 1.5px solid #25A9E0;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-weight: 600;
+            transition: all 0.18s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(142, 215, 249, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.18s ease;
+        }
+
+        .nav-link:hover {
+            color: #25A9E0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #25A9E0;
+            transition: width 0.18s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Active state for desktop nav links and mobile menu items */
+        .nav-link.active,
+        [data-page].active {
+            color: #25A9E0 !important;
+            font-weight: 700;
+        }
+
+        /* Keep the decorative underline (::after) visible for active items */
+        .nav-link.active::after,
+        [data-page].active::after {
+            width: 100%;
+        }
+
+        /* Hero CTA group: make hero CTAs consistent and responsive */
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .hero-cta-group .btn-primary,
+        .hero-cta-group .btn-secondary {
+            min-width: 160px;
+            height: 56px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        @media (max-width: 640px) {
+
+            .hero-cta-group .btn-primary,
+            .hero-cta-group .btn-secondary {
+                width: 100%;
+                min-width: 0;
+                height: 48px;
+            }
+        }
+
+        /* Slightly reduce hero subtitle on large screens so it fits on one line */
+        #hero-subtitle {
+            display: inline-block;
+        }
+
+        @media (min-width: 1024px) {
+            #hero-subtitle {
+                font-size: 0.9em;
+                line-height: 1.02;
+            }
+        }
+
+        .modal-overlay {
+            background: rgba(15, 23, 36, 0.4);
+            backdrop-filter: blur(4px);
+        }
+
+        .toast {
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .page-section {
+            display: none;
+            min-height: calc(100vh - 5rem);
+        }
+
+        .page-section.active {
+            display: block;
+            min-height: calc(100vh - 5rem);
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .search-input {
+            border-radius: 9999px;
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            padding: 10px 16px 10px 40px;
+            transition: all 0.18s ease;
+            font-size: 13px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #25A9E0;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 169, 224, 0.1);
+        }
+
+        .search-input::placeholder {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+
+        .rating-star {
+            color: #FCD34D;
+        }
+
+        .map-pin {
+            width: 40px;
+            height: 40px;
+            background: #25A9E0;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(37, 169, 224, 0.4);
+        }
+
+        .map-pin::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .carousel-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        /* Show exactly 4 cards centered on wide screens */
+        @media (min-width: 1024px) {
+            .carousel-container {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                padding-right: 1.5rem;
+                /* make room for scrollbar */
+                overflow: visible;
+            }
+
+            .carousel-container .carousel-item {
+                flex: 0 0 calc((100% - 3rem) / 4);
+                max-width: calc((100% - 3rem) / 4);
+            }
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            border: 1.5px solid #E5E7EB;
+            background: white;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            font-size: 14px;
+        }
+
+        .filter-chip:hover,
+        .filter-chip.active {
+            border-color: #25A9E0;
+            background: rgba(37, 169, 224, 0.1);
+            color: #25A9E0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #25A9E0, #8ED7F9);
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item::before {
+                left: 20px;
+            }
+        }
+
+        /* Horizontal two-row scroller for map results */
+        .hscroll-grid {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-rows: 1fr;
+            grid-auto-columns: 18rem;
+            grid-template-rows: repeat(2, 1fr);
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        :root {
+            --card-w: 18rem;
+            --card-gap: 0.75rem;
+        }
+
+        /* Carousel viewport showing exactly 5 cards centered with nav buttons */
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 0.5rem;
+        }
+
+        .carousel-viewport {
+            overflow: hidden;
+            height: 100%;
+            width: calc(5 * var(--card-w) + 4 * var(--card-gap));
+        }
+
+        .map-carousel-track {
+            display: flex;
+            gap: var(--card-gap);
+            align-items: start;
+            height: 100%;
+        }
+
+        .carousel-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 12px rgba(2, 6, 23, 0.06);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .carousel-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* hide native scrollbar for track */
+        .map-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hscroll-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .hscroll-grid::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.12);
+            border-radius: 9999px;
+        }
+
+        .hscroll-card {
+            min-width: 18rem;
+            max-width: 18rem;
+            display: block;
+        }
+
+        /* Filter sidebar improvements */
+        .filter-section {
+            display: block;
+        }
+
+        .filter-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #374151;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            background: #fff;
+            transition: box-shadow 0.12s ease, border-color 0.12s ease;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            box-shadow: 0 6px 18px rgba(37, 169, 224, 0.12);
+            border-color: #25A9E0;
+        }
+
+        .filter-aside .apply-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.6rem;
+        }
+
+        .filter-note {
+            font-size: 13px;
+            color: #6B7280;
+            margin-top: 0.25rem;
+        }
+    </style>
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="h-full bg-white text-gray-900">
+    <div id="app" class="h-full w-full flex flex-col"><!-- Header -->
+        <header id="header" class="sticky top-0 bg-white border-b border-gray-100 z-50 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20"><!-- Logo -->
+                    <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white text-xl font-bold">中</span>
+                        </div><span id="site-title" class="text-xl font-bold text-gray-900 hidden sm:block">Trung Tâm
+                            Tiếng Trung</span>
+                    </div><!-- Search Bar (Desktop) -->
+                    <div class="hidden md:flex flex-1 max-w-lg mx-8 relative">
+                    </div><!-- Navigation (Desktop) -->
+                    <nav class="hidden lg:flex items-center space-x-8 mx-auto"><a href="#" data-page="home"
+                            class="nav-link text-gray-700 font-medium" onclick="navigateTo('home'); return false;">Trang
+                            chủ</a> <a href="#" data-page="map" class="nav-link text-gray-700 font-medium"
+                            onclick="navigateTo('map'); return false;">Bản đồ</a> <a href="#" data-page="centers"
+                            class="nav-link text-gray-700 font-medium"
+                            onclick="navigateTo('centers'); return false;">Danh sách Trung tâm</a> <a href="#"
+                            data-page="blog" class="nav-link text-gray-700 font-medium"
+                            onclick="navigateTo('blog'); return false;">Blog</a> <a href="#" data-page="about"
+                            class="nav-link text-gray-700 font-medium" onclick="navigateTo('about'); return false;">Về
+                            chúng tôi</a>
+                    </nav><!-- Account & Mobile Menu -->
+                    <div class="flex items-center space-x-2 ml-6"><button
+                            class="hidden lg:flex items-center space-x-1 text-gray-700 hover:text-blue-500 transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg><span class="font-medium">Đăng nhập</span> </button> <!-- Mobile Menu Button -->
+                        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100"
+                            onclick="toggleMobileMenu()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+        </header><!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 lg:hidden">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-8"><span class="text-xl font-bold">Menu</span> <button
+                        onclick="toggleMobileMenu()" class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg></button>
+                </div>
+                <nav class="space-y-4"><a href="#" data-page="home"
+                        class="block py-3 px-4 rounded-lg hover:bg-gray-50 font-medium"
+                        onclick="navigateTo('home'); toggleMobileMenu(); return false;">Trang chủ</a> <a href="#"
+                        data-page="map" class="block py-3 px-4 rounded-lg hover:bg-gray-50 font-medium"
+                        onclick="navigateTo('map'); toggleMobileMenu(); return false;">Bản đồ</a> <a href="#"
+                        data-page="centers" class="block py-3 px-4 rounded-lg hover:bg-gray-50 font-medium"
+                        onclick="navigateTo('centers'); toggleMobileMenu(); return false;">Danh sách Trung tâm</a> <a
+                        href="#" data-page="blog" class="block py-3 px-4 rounded-lg hover:bg-gray-50 font-medium"
+                        onclick="navigateTo('blog'); toggleMobileMenu(); return false;">Blog</a> <a href="#"
+                        data-page="about" class="block py-3 px-4 rounded-lg hover:bg-gray-50 font-medium"
+                        onclick="navigateTo('about'); toggleMobileMenu(); return false;">Về chúng tôi</a>
+                    <div class="pt-4 border-t"><button class="w-full btn-primary">Đăng nhập</button>
+                    </div>
+                </nav>
+            </div>
+        </div><!-- Main Content -->
+        <main class="flex-1 w-full overflow-auto"><!-- HOME PAGE -->
+            <section id="page-home" class="page-section active"><!-- Hero Section -->
+                <div class="relative bg-white overflow-hidden">
+                    <div class="hero-blob w-96 h-96 bg-blue-400 top-0 right-0"></div>
+                    <div class="hero-blob w-80 h-80 bg-blue-300 bottom-20 left-10"></div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
+                        <div class="grid lg:grid-cols-2 gap-12 items-stretch"><!-- Left: Hero Text -->
+                            <div class="space-y-6">
+                                <div class="inline-block px-4 py-2 bg-blue-50 rounded-full"><span
+                                        class="text-sm font-semibold text-blue-600">BETA • Hoàn toàn miễn phí</span>
+                                </div>
+                                <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"><span
+                                        id="hero-title">Tìm trung tâm tiếng Trung uy tín</span><br><span
+                                        id="hero-subtitle" class="text-blue-500">Nhanh chóng &amp; minh bạch</span></h1>
+                                <p id="hero-description" class="text-lg text-gray-600 leading-relaxed">So sánh học phí,
+                                    chất lượng, đánh giá thực tế từ học viên — tất cả trong một nơi.</p>
+                                <div class="flex flex-col sm:flex-row gap-4 hero-cta-group">
+                                    <button id="cta-primary" class="btn-primary text-lg" onclick="navigateTo('map')">Tìm
+                                        trung tâm ngay</button>
+                                    <button id="cta-centers" class="btn-secondary text-lg"
+                                        onclick="navigateTo('centers')">Danh sách trung tâm</button>
+                                    <button id="cta-consult" class="btn-secondary text-lg" onclick="openModal()">Nhận tư
+                                        vấn</button>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-500">
+                                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewbox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd" />
+                                    </svg><span>Dữ liệu cập nhật hằng tuần • Không quảng cáo che giấu</span>
+                                </div>
+                            </div><!-- Right: Search Card -->
+                            <div class="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100 flex flex-col">
+                                <div class="grid grid-cols-1 gap-4 items-start flex-1">
+                                    <div class="flex flex-col h-full">
+                                        <h3 class="text-xl font-bold text-gray-900 mb-4">Bản đồ trung tâm</h3>
+                                        <div class="w-full rounded-xl overflow-hidden border border-gray-100 flex-1">
+                                            <iframe id="hero-mini-map"
+                                                src="https://www.google.com/maps?q=21.0278,105.8342&z=12&output=embed"
+                                                class="w-full h-full border-0 rounded-xl" allowfullscreen=""
+                                                loading="lazy"></iframe>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button class="btn-primary w-full"
+                                                onclick="applyHeroFiltersAndGoToMap()">Tìm kiếm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Featured Centers -->
+
+                <!-- Nearby Centers (moved up as requested) -->
+                <div class="py-8 bg-white">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="lg:col-span-2 space-y-4">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Trung tâm gần bạn</h3>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition">
+                                    <h4 class="font-bold text-gray-900 mb-2">Trung tâm Hán Ngữ Thăng Long</h4>
+                                    <div class="flex items-center space-x-2 text-sm text-gray-600 mb-2"><span>📍 1.2
+                                            km</span> <span>•</span> <span class="rating-star">⭐ 4.8</span>
+                                    </div>
+                                    <div class="text-blue-600 font-semibold mb-2">Từ 1.500.000đ/tháng</div>
+                                    <button class="text-blue-500 text-sm font-medium hover:underline"
+                                        onclick="openCenterDetail('Trung tâm Hán Ngữ Thăng Long')">Xem chi tiết
+                                        →</button>
+                                </div>
+                                <div class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition">
+                                    <h4 class="font-bold text-gray-900 mb-2">Học viện Hán Ngữ Quốc Tế</h4>
+                                    <div class="flex items-center space-x-2 text-sm text-gray-600 mb-2"><span>📍 2.5
+                                            km</span> <span>•</span> <span class="rating-star">⭐ 4.7</span>
+                                    </div>
+                                    <div class="text-blue-600 font-semibold mb-2">Từ 1.200.000đ/tháng</div>
+                                    <button class="text-blue-500 text-sm font-medium hover:underline"
+                                        onclick="openCenterDetail('Học viện Hán Ngữ Quốc Tế')">Xem chi tiết →</button>
+                                </div>
+                                <div class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition">
+                                    <h4 class="font-bold text-gray-900 mb-2">Trung tâm Ngữ Văn Trung Hoa</h4>
+                                    <div class="flex items-center space-x-2 text-sm text-gray-600 mb-2"><span>📍 3.8
+                                            km</span> <span>•</span> <span class="rating-star">⭐ 4.9</span>
+                                    </div>
+                                    <div class="text-blue-600 font-semibold mb-2">Từ 1.800.000đ/tháng</div>
+                                    <button class="text-blue-500 text-sm font-medium hover:underline"
+                                        onclick="openCenterDetail('Trung tâm Ngữ Văn Trung Hoa')">Xem chi tiết
+                                        →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 py-16">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-3">Trung tâm nổi bật trong tuần</h2>
+                            <p class="text-gray-600">Được chọn dựa trên điểm đánh giá và độ tin cậy từ học viên</p>
+                        </div>
+                        <div class="carousel-container flex gap-6 pb-4"><!-- Center Card 1 -->
+                            <div class="carousel-item w-80 bg-white rounded-2xl shadow-lg p-6 card-hover">
+                                <div class="flex items-start space-x-4 mb-4">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-2xl font-bold">漢</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Trung tâm Hán Ngữ Thăng Long
+                                        </h3>
+                                        <div class="flex items-center space-x-1 mb-2"><span class="rating-star">⭐</span>
+                                            <span class="font-semibold text-gray-900">4.8</span> <span
+                                                class="text-sm text-gray-500">(120 đánh giá)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg><span>Q.1, TP. Hồ Chí Minh</span>
+                                    </div>
+                                    <div class="text-blue-600 font-semibold">
+                                        Từ 1.500.000đ/tháng
+                                    </div>
+                                    <div class="flex flex-wrap gap-2"><span
+                                            class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Cam
+                                            kết đầu ra</span> <span
+                                            class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">Lớp
+                                            tối</span>
+                                    </div><button class="btn-secondary w-full mt-4"
+                                        onclick="openCenterDetail('Trung tâm Hán Ngữ Thăng Long')">Xem chi tiết</button>
+                                </div>
+                            </div><!-- Center Card 2 -->
+                            <div class="carousel-item w-80 bg-white rounded-2xl shadow-lg p-6 card-hover">
+                                <div class="flex items-start space-x-4 mb-4">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-2xl font-bold">語</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Trung tâm Ngữ Văn Trung Hoa
+                                        </h3>
+                                        <div class="flex items-center space-x-1 mb-2"><span class="rating-star">⭐</span>
+                                            <span class="font-semibold text-gray-900">4.9</span> <span
+                                                class="text-sm text-gray-500">(95 đánh giá)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg><span>Q.Đống Đa, Hà Nội</span>
+                                    </div>
+                                    <div class="text-blue-600 font-semibold">
+                                        Từ 1.800.000đ/tháng
+                                    </div>
+                                    <div class="flex flex-wrap gap-2"><span
+                                            class="px-3 py-1 bg-purple-50 text-purple-600 text-xs font-medium rounded-full">HSK
+                                            1-6</span> <span
+                                            class="px-3 py-1 bg-orange-50 text-orange-600 text-xs font-medium rounded-full">Học
+                                            thử miễn phí</span>
+                                    </div><button class="btn-secondary w-full mt-4"
+                                        onclick="openCenterDetail('Trung tâm Ngữ Văn Trung Hoa')">Xem chi tiết</button>
+                                </div>
+                            </div><!-- Center Card 3 -->
+                            <div class="carousel-item w-80 bg-white rounded-2xl shadow-lg p-6 card-hover">
+                                <div class="flex items-start space-x-4 mb-4">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-2xl font-bold">学</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Học viện Hán Ngữ Quốc Tế</h3>
+                                        <div class="flex items-center space-x-1 mb-2"><span class="rating-star">⭐</span>
+                                            <span class="font-semibold text-gray-900">4.7</span> <span
+                                                class="text-sm text-gray-500">(88 đánh giá)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg><span>Q.Hải Châu, Đà Nẵng</span>
+                                    </div>
+                                    <div class="text-blue-600 font-semibold">
+                                        Từ 1.200.000đ/tháng
+                                    </div>
+                                    <div class="flex flex-wrap gap-2"><span
+                                            class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Online/Offline</span>
+                                        <span
+                                            class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">Cuối
+                                            tuần</span>
+                                    </div><button class="btn-secondary w-full mt-4"
+                                        onclick="openCenterDetail('Học viện Hán Ngữ Quốc Tế')">Xem chi tiết</button>
+                                </div>
+                            </div><!-- Center Card 4 -->
+                            <div class="carousel-item w-80 bg-white rounded-2xl shadow-lg p-6 card-hover">
+                                <div class="flex items-start space-x-4 mb-4">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-2xl font-bold">文</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Trung tâm Văn Hóa Trung Quốc
+                                        </h3>
+                                        <div class="flex items-center space-x-1 mb-2"><span class="rating-star">⭐</span>
+                                            <span class="font-semibold text-gray-900">4.6</span> <span
+                                                class="text-sm text-gray-500">(102 đánh giá)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg><span>Q.3, TP. Hồ Chí Minh</span>
+                                    </div>
+                                    <div class="text-blue-600 font-semibold">
+                                        Từ 2.000.000đ/tháng
+                                    </div>
+                                    <div class="flex flex-wrap gap-2"><span
+                                            class="px-3 py-1 bg-red-50 text-red-600 text-xs font-medium rounded-full">Giáo
+                                            viên bản ngữ</span> <span
+                                            class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Giao
+                                            tiếp</span>
+                                    </div><button class="btn-secondary w-full mt-4"
+                                        onclick="openCenterDetail('Trung tâm Văn Hóa Trung Quốc')">Xem chi tiết</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-16 bg-white">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="grid lg:grid-cols-2 gap-12"><!-- Blog -->
+                            <div>
+                                <div class="flex items-center justify-between mb-8">
+                                    <h2 class="text-3xl font-bold text-gray-900">Bài viết mới</h2><a href="#"
+                                        class="text-blue-500 font-medium hover:underline"
+                                        onclick="navigateTo('blog'); return false;">Xem tất cả →</a>
+                                </div>
+                                <div class="space-y-6">
+                                    <div
+                                        class="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition">
+                                        <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500"></div>
+                                        <div class="p-6"><span
+                                                class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Kinh
+                                                nghiệm học</span>
+                                            <h3 class="text-xl font-bold text-gray-900 mt-3 mb-2">5 bí quyết học tiếng
+                                                Trung hiệu quả cho người mới bắt đầu</h3>
+                                            <p class="text-gray-600 mb-4">Chia sẻ từ những người đã đạt HSK 6 trong vòng
+                                                2 năm về phương pháp học tập khoa học...</p>
+                                            <div class="flex items-center text-sm text-gray-500"><span>15/01/2025</span>
+                                                <span class="mx-2">•</span> <span>5 phút đọc</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition">
+                                        <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500"></div>
+                                        <div class="p-6"><span
+                                                class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">HSK</span>
+                                            <h3 class="text-xl font-bold text-gray-900 mt-3 mb-2">Cấu trúc đề thi HSK 4
+                                                và chiến lược làm bài đạt điểm cao</h3>
+                                            <p class="text-gray-600 mb-4">Phân tích chi tiết từng phần thi, thời gian
+                                                phân bổ và mẹo làm bài từ giáo viên có 10 năm kinh nghiệm...</p>
+                                            <div class="flex items-center text-sm text-gray-500"><span>12/01/2025</span>
+                                                <span class="mx-2">•</span> <span>8 phút đọc</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Community -->
+                            <div>
+                                <div class="flex items-center justify-between mb-8">
+                                    <h2 class="text-3xl font-bold text-gray-900">Cộng đồng học viên</h2><a href="#"
+                                        class="text-blue-500 font-medium hover:underline"
+                                        onclick="navigateTo('blog'); return false;">Vào cộng đồng →</a>
+                                </div>
+                                <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 mb-6">
+                                    <div class="flex items-center space-x-3 mb-4">
+                                        <div
+                                            class="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+                                            N
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-gray-900">
+                                                Nguyễn Minh Anh
+                                            </div>
+                                            <div class="text-sm text-gray-600">
+                                                HSK 4 learner
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-4">Mình vừa thi xong HSK 4 và đạt 280/300 điểm! Cảm ơn
+                                        các bạn trong group đã support mình suốt 6 tháng qua. Đặc biệt là phần nghe,
+                                        mình đã cải thiện rất nhiều nhờ các tips từ anh Tuấn và chị Hoa 🎉</p>
+                                    <div class="h-40 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-xl mb-4">
+                                    </div>
+                                    <div class="flex items-center space-x-6 text-sm text-gray-600"><button
+                                            class="flex items-center space-x-2 hover:text-blue-500 transition">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                            </svg><span>124 thích</span> </button> <button
+                                            class="flex items-center space-x-2 hover:text-blue-500 transition">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                            </svg><span>32 bình luận</span> </button>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="bg-white border border-gray-200 rounded-xl p-4">
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                                T
+                                            </div>
+                                            <div>
+                                                <div class="font-semibold text-gray-900">
+                                                    Trần Văn Tuấn
+                                                </div>
+                                                <div class="text-xs text-gray-500">
+                                                    2 giờ trước
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-700">Các bạn có thể gợi ý trung tâm tốt ở quận Đống Đa
+                                            không? Mình muốn học HSK 3, ưu tiên lớp tối.</p>
+                                        <div class="flex items-center space-x-4 mt-3 text-sm text-gray-600"><span>❤️
+                                                8</span> <span>💬 15</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white border border-gray-200 rounded-xl p-4">
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                                H
+                                            </div>
+                                            <div>
+                                                <div class="font-semibold text-gray-900">
+                                                    Hoàng Thu Hà
+                                                </div>
+                                                <div class="text-xs text-gray-500">
+                                                    5 giờ trước
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-700">Share tài liệu luyện viết chữ Hán cho các bạn mới học
+                                            nè! 📝</p>
+                                        <div class="flex items-center space-x-4 mt-3 text-sm text-gray-600"><span>❤️
+                                                45</span> <span>💬 12</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Quick Compare -->
+                <div class="bg-gray-50 py-16">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-3">So sánh nhanh trung tâm</h2>
+                            <p class="text-gray-600">Chọn tối đa 3 trung tâm để so sánh học phí, lịch học, rating</p>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-xl p-8">
+                            <div class="grid md:grid-cols-3 gap-4 mb-6"><select
+                                    class="px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option>Chọn trung tâm 1</option>
+                                    <option>Trung tâm Hán Ngữ Thăng Long</option>
+                                    <option>Trung tâm Ngữ Văn Trung Hoa</option>
+                                    <option>Học viện Hán Ngữ Quốc Tế</option>
+                                </select> <select
+                                    class="px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option>Chọn trung tâm 2</option>
+                                    <option>Trung tâm Hán Ngữ Thăng Long</option>
+                                    <option>Trung tâm Ngữ Văn Trung Hoa</option>
+                                    <option>Học viện Hán Ngữ Quốc Tế</option>
+                                </select> <select
+                                    class="px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option>Chọn trung tâm 3 (tuỳ chọn)</option>
+                                    <option>Trung tâm Hán Ngữ Thăng Long</option>
+                                    <option>Trung tâm Ngữ Văn Trung Hoa</option>
+                                    <option>Học viện Hán Ngữ Quốc Tế</option>
+                                </select>
+                            </div><button class="btn-primary mb-8">So sánh ngay</button> <!-- Comparison Table -->
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr class="border-b-2 border-gray-200">
+                                            <th class="text-left py-4 px-4 font-bold text-gray-900">Tiêu chí</th>
+                                            <th class="text-center py-4 px-4 font-bold text-gray-900">Trung tâm 1</th>
+                                            <th class="text-center py-4 px-4 font-bold text-gray-900">Trung tâm 2</th>
+                                            <th class="text-center py-4 px-4 font-bold text-gray-900">Trung tâm 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-100">
+                                            <td class="py-4 px-4 font-medium text-gray-700">Học phí (từ)</td>
+                                            <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.500.000đ
+                                            </td>
+                                            <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.800.000đ
+                                            </td>
+                                            <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.200.000đ
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-100">
+                                            <td class="py-4 px-4 font-medium text-gray-700">Rating</td>
+                                            <td class="py-4 px-4 text-center">⭐ 4.8</td>
+                                            <td class="py-4 px-4 text-center">⭐ 4.9</td>
+                                            <td class="py-4 px-4 text-center">⭐ 4.7</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-100">
+                                            <td class="py-4 px-4 font-medium text-gray-700">Học thử miễn phí</td>
+                                            <td class="py-4 px-4 text-center">✅</td>
+                                            <td class="py-4 px-4 text-center">✅</td>
+                                            <td class="py-4 px-4 text-center">❌</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-100">
+                                            <td class="py-4 px-4 font-medium text-gray-700">Lịch học</td>
+                                            <td class="py-4 px-4 text-center text-sm">Tối, Cuối tuần</td>
+                                            <td class="py-4 px-4 text-center text-sm">Sáng, Chiều, Tối</td>
+                                            <td class="py-4 px-4 text-center text-sm">Cuối tuần</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-4 px-4 font-medium text-gray-700">Địa điểm</td>
+                                            <td class="py-4 px-4 text-center text-sm">Q.1, TP.HCM</td>
+                                            <td class="py-4 px-4 text-center text-sm">Q.Đống Đa, HN</td>
+                                            <td class="py-4 px-4 text-center text-sm">Q.Hải Châu, ĐN</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-4 mt-6"><button class="btn-secondary">Xem chi
+                                    tiết</button> <button class="btn-secondary">Xem chi tiết</button> <button
+                                    class="btn-secondary">Xem chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Footer CTA -->
+                <div class="py-8 bg-white">
+                    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div
+                            class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-3xl p-6 md:p-8 text-white shadow-2xl">
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <h2 class="text-3xl font-bold mb-3">Cần tư vấn chọn khóa phù hợp?</h2>
+                                    <p class="text-blue-100">Để lại số, chúng tôi gọi lại trong 24h</p>
+                                </div>
+                                <div class="flex gap-3"><input type="tel" placeholder="Số điện thoại của bạn"
+                                        class="flex-1 px-4 py-3 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-white">
+                                    <button
+                                        class="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition">Gửi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- MAP PAGE -->
+            <section id="page-map" class="page-section relative">
+                <div class="flex" style="min-height: calc(100vh - 5rem);"><!-- Map Area (two-column: filters + map) -->
+                    <aside class="w-96 bg-white border-r border-gray-100 p-6 overflow-auto">
+                        <h3 class="text-xl font-bold mb-4">Bộ lọc</h3>
+                        <div class="space-y-4">
+                            <!-- Name filter removed — top search handles name/address -->
+
+                            <div class="filter-section">
+                                <label class="text-sm font-medium">📍 Khoảng cách</label>
+                                <select id="map-filter-proximity" class="filter-select">
+                                    <option value="near">Gần bạn</option>
+                                    <option value="5km">Trong 5 km</option>
+                                    <option value="10km">Trong 10 km</option>
+                                    <option value="city">Trong thành phố</option>
+                                    <option value="all">Tất cả</option>
+                                </select>
+                                <div class="filter-note">Chọn phạm vi gần nhất để ưu tiên kết quả gần bạn.</div>
+                            </div>
+                            <div class="filter-section">
+                                <label class="text-sm font-medium">💰 Học phí</label>
+                                <select id="map-filter-price" class="filter-select">
+                                    <option value="under1">Dưới 1.000.000đ</option>
+                                    <option value="1to2">1.000.000đ - 2.000.000đ</option>
+                                    <option value="2to3">2.000.000đ - 3.000.000đ</option>
+                                    <option value="under3">Dưới 3.000.000đ</option>
+                                    <option value="all">Tất cả</option>
+                                </select>
+                                <div class="filter-note">Lọc nhanh theo mức học phí phổ biến.</div>
+                            </div>
+                            <div class="filter-section">
+                                <label class="text-sm font-medium">🌙 Lịch</label>
+                                <select id="map-filter-schedule" class="filter-select">
+                                    <option value="morning">Sáng</option>
+                                    <option value="afternoon">Chiều</option>
+                                    <option value="evening">Lớp tối</option>
+                                    <option value="weekend">Cuối tuần</option>
+                                    <option value="all">Tất cả</option>
+                                </select>
+                                <div class="filter-note">Chọn lịch bạn ưu tiên (có thể kết hợp nhiều lựa chọn sau này).
+                                </div>
+                            </div>
+                            <div class="filter-aside apply-row">
+                                <button id="map-filter-apply" class="btn-primary flex-1">Áp dụng</button>
+                                <button id="map-filter-reset" class="btn-secondary flex-1">Xóa</button>
+                            </div>
+                        </div>
+
+
+                    </aside>
+
+                    <div class="flex-1 relative bg-gradient-to-br from-blue-50 to-blue-100 overflow-hidden"
+                        style="height: calc(100vh - 5rem - 28vh);">
+                        <!-- Real Google Maps iframe fills area -->
+                        <iframe id="main-map-iframe"
+                            src="https://www.google.com/maps?q=21.0278,105.8342&z=12&output=embed"
+                            class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+
+                        <!-- Top search bar (over map) - simplified -->
+                        <div class="absolute top-6 left-1/2 transform -translate-x-1/2 z-40 w-full max-w-3xl px-4">
+                            <div
+                                class="bg-white rounded-full shadow-lg flex items-center overflow-hidden border border-gray-100">
+                                <input id="map-search-input" type="text"
+                                    class="flex-1 px-4 py-3 text-sm md:text-base focus:outline-none"
+                                    placeholder="Tìm tên trung tâm, quận, địa chỉ...">
+                                <button id="map-search-btn" class="btn-primary px-6 rounded-r-full">Tìm kiếm</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Fixed bottom results: full-width bar occupying lower part of the viewport -->
+                <div id="map-results-overlay" class="fixed left-0 right-0 bottom-0" style="height:28vh; z-index:30;">
+                    <!-- full-bleed container so scroller spans entire viewport width -->
+                    <div class="h-full w-full">
+                        <div id="map-results-wrapper"
+                            class="h-full bg-white rounded-t-2xl shadow-xl overflow-x-auto overflow-y-hidden p-3 w-full">
+                        </div>
+                    </div>
+                </div>
+            </section><!-- BLOG & COMMUNITY PAGE -->
+
+            <!-- CENTERS LIST PAGE -->
+            <section id="page-centers" class="page-section">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div class="text-center mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900">Danh sách Trung tâm</h1>
+                        <p class="text-gray-600">Duyệt toàn bộ trung tâm, lọc và so sánh</p>
+                    </div>
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="text" placeholder="Tìm trung tâm, quận..."
+                                            class="px-4 py-3 border rounded-lg w-80">
+                                        <select class="px-4 py-3 border rounded-lg">
+                                            <option>Thành phố</option>
+                                            <option>Hà Nội</option>
+                                            <option>TP.HCM</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <button class="btn-secondary" onclick="navigateTo('map')">Xem trên bản
+                                            đồ</button>
+                                        <button class="btn-primary"
+                                            onclick="document.getElementById('compare-panel').scrollIntoView({behavior:'smooth'})">So
+                                            sánh</button>
+                                    </div>
+                                </div>
+                                <div id="centers-list" class="space-y-4">
+                                    <!-- Example center item -->
+                                    <div
+                                        class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition flex items-start justify-between">
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">Trung tâm Hán Ngữ Thăng Long</h4>
+                                            <div class="text-sm text-gray-600">123 Nguyễn Huệ, Q.1, TP.HCM • <span
+                                                    class="rating-star">⭐ 4.8</span></div>
+                                            <div class="text-blue-600 font-semibold mt-2">Từ 1.500.000đ/tháng</div>
+                                        </div>
+                                        <div class="flex flex-col gap-2 w-40">
+                                            <button class="btn-secondary"
+                                                onclick="openCenterDetail('Trung tâm Hán Ngữ Thăng Long')">Chi
+                                                tiết</button>
+                                            <button class="btn-primary"
+                                                onclick="addToCompare('Trung tâm Hán Ngữ Thăng Long')">So sánh</button>
+                                        </div>
+                                    </div>
+                                    <!-- More items can be generated dynamically -->
+                                </div>
+                            </div>
+                            <!-- Comparison panel moved to bottom of list -->
+                            <div id="compare-panel" class="mt-8 bg-white rounded-2xl shadow-xl p-8">
+                                <h3 class="text-xl font-bold mb-4">So sánh nhanh trung tâm</h3>
+                                <div class="grid md:grid-cols-3 gap-4 mb-6"><select class="px-4 py-3 border rounded-lg">
+                                        <option>Chọn trung tâm 1</option>
+                                    </select> <select class="px-4 py-3 border rounded-lg">
+                                        <option>Chọn trung tâm 2</option>
+                                    </select> <select class="px-4 py-3 border rounded-lg">
+                                        <option>Chọn trung tâm 3</option>
+                                    </select></div>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full">
+                                        <thead>
+                                            <tr class="border-b-2 border-gray-200">
+                                                <th class="text-left py-4 px-4 font-bold">Tiêu chí</th>
+                                                <th class="text-center py-4 px-4 font-bold">Trung tâm 1</th>
+                                                <th class="text-center py-4 px-4 font-bold">Trung tâm 2</th>
+                                                <th class="text-center py-4 px-4 font-bold">Trung tâm 3</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b border-gray-100">
+                                                <td class="py-4 px-4 font-medium">Học phí (từ)</td>
+                                                <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.500.000đ
+                                                </td>
+                                                <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.800.000đ
+                                                </td>
+                                                <td class="py-4 px-4 text-center text-blue-600 font-semibold">1.200.000đ
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <aside class="space-y-6">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h3 class="font-bold text-gray-900 mb-4">Bộ lọc</h3>
+                                <div class="space-y-3"><label class="text-sm">Thành phố</label><select
+                                        class="w-full px-3 py-2 border rounded-lg">
+                                        <option>Tất cả</option>
+                                    </select></div>
+                                <div class="space-y-3"><label class="text-sm">Học phí</label><input type="range"
+                                        class="w-full" min="0" max="5000000"></div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <h3 class="font-bold text-gray-900 mb-4">Trung tâm gần bạn</h3>
+                                <div class="text-sm text-gray-600">Hiển thị các trung tâm gần vị trí của bạn</div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CENTER DETAIL PAGE -->
+            <section id="page-center-detail" class="page-section">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <button class="mb-6 text-sm text-blue-600 hover:underline" onclick="navigateTo('centers')">← Quay về
+                        danh sách</button>
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h2 id="center-detail-name" class="text-2xl font-bold mb-2">Tên trung tâm</h2>
+                        <div id="center-detail-rating" class="text-sm text-gray-600 mb-4">⭐ 4.8 • 120 đánh giá</div>
+                        <div id="center-detail-desc" class="text-gray-700 mb-6">Mô tả ngắn về trung tâm...</div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-2">Thông tin</h4>
+                                <p class="text-sm text-gray-600">Địa chỉ, học phí, lịch học...</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Liên hệ</h4>
+                                <p class="text-sm text-gray-600">Số điện thoại • Email</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="page-blog" class="page-section">
+                <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white py-16">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h1 class="text-4xl lg:text-5xl font-bold mb-4">Cộng đồng &amp; Blog</h1>
+                        <p class="text-xl text-blue-100">Chia sẻ kinh nghiệm, hỏi đáp cùng hàng trăm học viên tiếng
+                            Trung</p>
+                    </div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><!-- Tabs -->
+                    <div class="flex border-b border-gray-200 mb-8"><button
+                            class="px-6 py-3 font-semibold text-blue-600 border-b-2 border-blue-600">Blog</button>
+                        <button class="px-6 py-3 font-semibold text-gray-600 hover:text-blue-600 transition">Cộng
+                            đồng</button>
+                    </div>
+                    <div class="grid lg:grid-cols-3 gap-8"><!-- Main Content -->
+                        <div class="lg:col-span-2 space-y-8"><!-- Category Filter -->
+                            <div class="flex flex-wrap gap-3"><button class="filter-chip active">Tất cả</button> <button
+                                    class="filter-chip">Kinh nghiệm học</button> <button
+                                    class="filter-chip">HSK</button> <button class="filter-chip">Du học Trung
+                                    Quốc</button> <button class="filter-chip">Văn hóa</button>
+                            </div><!-- Blog Posts -->
+                            <div class="space-y-6">
+                                <article
+                                    class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                                    <div class="h-64 bg-gradient-to-br from-blue-400 to-purple-500"></div>
+                                    <div class="p-6">
+                                        <div class="flex items-center space-x-3 mb-3"><span
+                                                class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Kinh
+                                                nghiệm học</span> <span class="text-sm text-gray-500">15/01/2025</span>
+                                        </div>
+                                        <h2
+                                            class="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer">
+                                            5 bí quyết học tiếng Trung hiệu quả cho người mới bắt đầu</h2>
+                                        <p class="text-gray-600 mb-4">Chia sẻ từ những người đã đạt HSK 6 trong vòng 2
+                                            năm về phương pháp học tập khoa học, cách sắp xếp thời gian và duy trì động
+                                            lực học tập lâu dài...</p>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full">
+                                                </div>
+                                                <div>
+                                                    <div class="font-semibold text-gray-900">
+                                                        Nguyễn Văn A
+                                                    </div>
+                                                    <div class="text-sm text-gray-500">
+                                                        5 phút đọc
+                                                    </div>
+                                                </div>
+                                            </div><button class="text-blue-500 font-medium hover:underline">Đọc tiếp
+                                                →</button>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article
+                                    class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                                    <div class="h-64 bg-gradient-to-br from-green-400 to-blue-500"></div>
+                                    <div class="p-6">
+                                        <div class="flex items-center space-x-3 mb-3"><span
+                                                class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">HSK</span>
+                                            <span class="text-sm text-gray-500">12/01/2025</span>
+                                        </div>
+                                        <h2
+                                            class="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer">
+                                            Cấu trúc đề thi HSK 4 và chiến lược làm bài đạt điểm cao</h2>
+                                        <p class="text-gray-600 mb-4">Phân tích chi tiết từng phần thi, thời gian phân
+                                            bổ và mẹo làm bài từ giáo viên có 10 năm kinh nghiệm. Kèm theo bộ đề thi thử
+                                            và đáp án chi tiết...</p>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full">
+                                                </div>
+                                                <div>
+                                                    <div class="font-semibold text-gray-900">
+                                                        Trần Thị B
+                                                    </div>
+                                                    <div class="text-sm text-gray-500">
+                                                        8 phút đọc
+                                                    </div>
+                                                </div>
+                                            </div><button class="text-blue-500 font-medium hover:underline">Đọc tiếp
+                                                →</button>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article
+                                    class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                                    <div class="h-64 bg-gradient-to-br from-yellow-400 to-orange-500"></div>
+                                    <div class="p-6">
+                                        <div class="flex items-center space-x-3 mb-3"><span
+                                                class="px-3 py-1 bg-yellow-50 text-yellow-600 text-xs font-medium rounded-full">Du
+                                                học</span> <span class="text-sm text-gray-500">10/01/2025</span>
+                                        </div>
+                                        <h2
+                                            class="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer">
+                                            Hướng dẫn xin học bổng du học Trung Quốc năm 2025</h2>
+                                        <p class="text-gray-600 mb-4">Tổng hợp các chương trình học bổng toàn phần và
+                                            bán phần, điều kiện, hồ sơ cần thiết và timeline nộp đơn. Chia sẻ từ du học
+                                            sinh đang học tại Bắc Kinh...</p>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center space-x-3">
+                                                <div
+                                                    class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full">
+                                                </div>
+                                                <div>
+                                                    <div class="font-semibold text-gray-900">
+                                                        Lê Văn C
+                                                    </div>
+                                                    <div class="text-sm text-gray-500">
+                                                        12 phút đọc
+                                                    </div>
+                                                </div>
+                                            </div><button class="text-blue-500 font-medium hover:underline">Đọc tiếp
+                                                →</button>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div><!-- Pagination -->
+                            <div class="flex justify-center space-x-2"><button
+                                    class="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 transition">←</button>
+                                <button class="w-10 h-10 rounded-lg bg-blue-500 text-white font-semibold">1</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 transition">2</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 transition">3</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 transition">→</button>
+                            </div>
+                        </div><!-- Sidebar -->
+                        <div class="space-y-6"><!-- Search -->
+                            <div class="bg-white rounded-2xl shadow-lg p-6">
+                                <h3 class="font-bold text-gray-900 mb-4">Tìm kiếm bài viết</h3>
+                                <div class="relative">
+                                    <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                                        fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg><input type="text"
+                                        class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Tìm kiếm...">
+                                </div>
+                            </div><!-- Popular Posts -->
+                            <div class="bg-white rounded-2xl shadow-lg p-6">
+                                <h3 class="font-bold text-gray-900 mb-4">Bài viết nổi bật</h3>
+                                <div class="space-y-4"><a href="#" class="block hover:text-blue-600 transition">
+                                        <div class="flex space-x-3">
+                                            <div
+                                                class="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex-shrink-0">
+                                            </div>
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-sm mb-1">Top 10 trung tâm tiếng Trung uy
+                                                    tín nhất Hà Nội</h4><span class="text-xs text-gray-500">1.2k lượt
+                                                    xem</span>
+                                            </div>
+                                        </div>
+                                    </a> <a href="#" class="block hover:text-blue-600 transition">
+                                        <div class="flex space-x-3">
+                                            <div
+                                                class="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex-shrink-0">
+                                            </div>
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-sm mb-1">Lộ trình học HSK từ 0 đến 6 trong
+                                                    2 năm</h4><span class="text-xs text-gray-500">980 lượt xem</span>
+                                            </div>
+                                        </div>
+                                    </a> <a href="#" class="block hover:text-blue-600 transition">
+                                        <div class="flex space-x-3">
+                                            <div
+                                                class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex-shrink-0">
+                                            </div>
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-sm mb-1">So sánh học phí các trung tâm tại
+                                                    TP.HCM</h4><span class="text-xs text-gray-500">850 lượt xem</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- Newsletter -->
+                            <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
+                                <h3 class="font-bold text-xl mb-2">Nhận bài viết mới</h3>
+                                <p class="text-blue-100 text-sm mb-4">Đăng ký để nhận thông báo khi có bài viết mới</p>
+                                <input type="email" placeholder="Email của bạn"
+                                    class="w-full px-4 py-2 rounded-lg text-gray-900 mb-3 focus:outline-none"> <button
+                                    class="w-full bg-white text-blue-600 py-2 rounded-lg font-semibold hover:bg-blue-50 transition">Đăng
+                                    ký</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- ABOUT PAGE -->
+            <section id="page-about" class="page-section">
+                <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white py-16">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h1 class="text-4xl lg:text-5xl font-bold mb-4">Về Chúng Tôi</h1>
+                        <p class="text-xl text-blue-100">Sứ mệnh của chúng tôi là giúp bạn tìm được nơi học phù hợp nhất
+                        </p>
+                    </div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><!-- Mission -->
+                    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Sứ mệnh của chúng tôi</h2>
+                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">Chúng tôi tin rằng việc tìm kiếm một
+                                trung tâm tiếng Trung phù hợp không nên là một quá trình khó khăn và mất thời gian. Với
+                                nền tảng của mình, chúng tôi mong muốn mang đến sự minh bạch, khách quan và tiện lợi cho
+                                người học.</p>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewbox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-900 mb-1">Minh bạch</h3>
+                                        <p class="text-gray-600">Thông tin học phí, chất lượng giảng dạy được công khai
+                                            rõ ràng</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-5 h-5 text-green-600" fill="currentColor" viewbox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-900 mb-1">Độc lập</h3>
+                                        <p class="text-gray-600">Đánh giá khách quan, không thiên vị bất kỳ trung tâm
+                                            nào</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-5 h-5 text-purple-600" fill="currentColor" viewbox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-900 mb-1">Cộng đồng</h3>
+                                        <p class="text-gray-600">Kết nối học viên, chia sẻ kinh nghiệm thực tế</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-5 h-5 text-orange-600" fill="currentColor" viewbox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-900 mb-1">Dữ liệu</h3>
+                                        <p class="text-gray-600">Cập nhật liên tục, chính xác từ nhiều nguồn đáng tin
+                                            cậy</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="w-full h-96 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl"></div>
+                        </div>
+                    </div><!-- Journey Timeline -->
+                    <div class="mb-20">
+                        <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Hành trình phát triển</h2>
+                        <div class="relative">
+                            <div class="space-y-12">
+                                <div class="relative pl-8 md:pl-0 md:grid md:grid-cols-2 gap-8 items-center">
+                                    <div class="md:text-right">
+                                        <div
+                                            class="inline-block bg-blue-500 text-white px-4 py-2 rounded-full font-bold mb-3">
+                                            Q1 2023
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-900 mb-2">Ý tưởng ra đời</h3>
+                                        <p class="text-gray-600">Nhận thấy khó khăn trong việc tìm kiếm thông tin trung
+                                            tâm tiếng Trung uy tín, chúng tôi quyết định xây dựng một nền tảng tập
+                                            trung.</p>
+                                    </div>
+                                    <div class="hidden md:block"></div>
+                                </div>
+                                <div class="relative pl-8 md:pl-0 md:grid md:grid-cols-2 gap-8 items-center">
+                                    <div class="hidden md:block"></div>
+                                    <div>
+                                        <div
+                                            class="inline-block bg-green-500 text-white px-4 py-2 rounded-full font-bold mb-3">
+                                            Q3 2023
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-900 mb-2">Thu thập dữ liệu</h3>
+                                        <p class="text-gray-600">Bắt đầu khảo sát và thu thập thông tin từ hơn 100 trung
+                                            tâm tiếng Trung tại Hà Nội và TP.HCM.</p>
+                                    </div>
+                                </div>
+                                <div class="relative pl-8 md:pl-0 md:grid md:grid-cols-2 gap-8 items-center">
+                                    <div class="md:text-right">
+                                        <div
+                                            class="inline-block bg-purple-500 text-white px-4 py-2 rounded-full font-bold mb-3">
+                                            Q1 2024
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-900 mb-2">Ra mắt Beta</h3>
+                                        <p class="text-gray-600">Phiên bản Beta được ra mắt với 150+ trung tâm và nhận
+                                            được phản hồi tích cực từ cộng đồng.</p>
+                                    </div>
+                                    <div class="hidden md:block"></div>
+                                </div>
+                                <div class="relative pl-8 md:pl-0 md:grid md:grid-cols-2 gap-8 items-center">
+                                    <div class="hidden md:block"></div>
+                                    <div>
+                                        <div
+                                            class="inline-block bg-orange-500 text-white px-4 py-2 rounded-full font-bold mb-3">
+                                            Q4 2024
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-900 mb-2">Mở rộng tính năng</h3>
+                                        <p class="text-gray-600">Thêm bản đồ tương tác, công cụ so sánh, cộng đồng học
+                                            viên và các công cụ học tập miễn phí.</p>
+                                    </div>
+                                </div>
+                                <div class="relative pl-8 md:pl-0 md:grid md:grid-cols-2 gap-8 items-center">
+                                    <div class="md:text-right">
+                                        <div
+                                            class="inline-block bg-blue-600 text-white px-4 py-2 rounded-full font-bold mb-3">
+                                            2025
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-900 mb-2">Phát triển toàn quốc</h3>
+                                        <p class="text-gray-600">Mục tiêu mở rộng ra tất cả các tỉnh thành và trở thành
+                                            nền tảng số 1 về tìm kiếm trung tâm tiếng Trung tại Việt Nam.</p>
+                                    </div>
+                                    <div class="hidden md:block"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Team -->
+                    <div class="mb-20">
+                        <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Đội ngũ của chúng tôi</h2>
+                        <div class="grid md:grid-cols-3 gap-8">
+                            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
+                                <div
+                                    class="w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full mx-auto mb-4">
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Nguyễn Văn A</h3>
+                                <p class="text-blue-600 font-medium mb-3">Founder &amp; CEO</p>
+                                <p class="text-gray-600 text-sm">10 năm kinh nghiệm trong lĩnh vực giáo dục và công nghệ
+                                </p>
+                            </div>
+                            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
+                                <div
+                                    class="w-24 h-24 bg-gradient-to-br from-green-400 to-blue-500 rounded-full mx-auto mb-4">
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Trần Thị B</h3>
+                                <p class="text-blue-600 font-medium mb-3">Head of Content</p>
+                                <p class="text-gray-600 text-sm">Giảng viên tiếng Trung với chứng chỉ HSK 6 và 8 năm
+                                    kinh nghiệm</p>
+                            </div>
+                            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
+                                <div
+                                    class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mx-auto mb-4">
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Lê Văn C</h3>
+                                <p class="text-blue-600 font-medium mb-3">Tech Lead</p>
+                                <p class="text-gray-600 text-sm">Chuyên gia phát triển web với 12 năm kinh nghiệm</p>
+                            </div>
+                        </div>
+                    </div><!-- FAQ -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Câu hỏi thường gặp</h2>
+                        <div class="max-w-3xl mx-auto space-y-4">
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden"><button
+                                    class="w-full px-6 py-4 text-left font-bold text-gray-900 hover:bg-gray-50 transition flex items-center justify-between">
+                                    <span>Dữ liệu trên website có chính xác không?</span>
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg></button>
+                                <div class="px-6 pb-4 text-gray-600">
+                                    Chúng tôi thu thập dữ liệu từ nhiều nguồn đáng tin cậy và cập nhật thường xuyên. Tuy
+                                    nhiên, chúng tôi khuyến khích bạn liên hệ trực tiếp với trung tâm để xác nhận thông
+                                    tin mới nhất.
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden"><button
+                                    class="w-full px-6 py-4 text-left font-bold text-gray-900 hover:bg-gray-50 transition flex items-center justify-between">
+                                    <span>Website có thu phí không?</span>
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg></button>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden"><button
+                                    class="w-full px-6 py-4 text-left font-bold text-gray-900 hover:bg-gray-50 transition flex items-center justify-between">
+                                    <span>Làm sao để đánh giá trung tâm?</span>
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg></button>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden"><button
+                                    class="w-full px-6 py-4 text-left font-bold text-gray-900 hover:bg-gray-50 transition flex items-center justify-between">
+                                    <span>Trung tâm có thể đăng ký trên website không?</span>
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewbox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </main><!-- Footer -->
+
+    </div><!-- Modal: Registration & Contact -->
+    <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center modal-overlay">
+        <div class="bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90%] overflow-y-auto shadow-2xl">
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Đăng ký trung tâm / Nhận tư vấn</h2><button
+                        onclick="closeModal()"
+                        class="w-10 h-10 rounded-lg hover:bg-gray-100 flex items-center justify-center transition">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg></button>
+                </div>
+                <form id="modal-form" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label for="modal-name" class="block text-sm font-medium text-gray-700 mb-2">Họ và tên
+                                *</label> <input type="text" id="modal-name" required
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div><label for="modal-phone" class="block text-sm font-medium text-gray-700 mb-2">Số điện thoại
+                                *</label> <input type="tel" id="modal-phone" required
+                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    <div><label for="modal-email" class="block text-sm font-medium text-gray-700 mb-2">Email (tuỳ
+                            chọn)</label> <input type="email" id="modal-email"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div><label for="modal-city" class="block text-sm font-medium text-gray-700 mb-2">Thành phố</label>
+                        <select id="modal-city"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>Chọn thành phố</option>
+                            <option>Hà Nội</option>
+                            <option>TP. Hồ Chí Minh</option>
+                            <option>Đà Nẵng</option>
+                            <option>Hải Phòng</option>
+                        </select>
+                    </div>
+                    <div><label for="modal-type" class="block text-sm font-medium text-gray-700 mb-2">Loại yêu
+                            cầu</label> <select id="modal-type"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>Đăng ký trung tâm</option>
+                            <option>Tư vấn chọn khóa</option>
+                            <option>Hợp tác</option>
+                        </select>
+                    </div>
+                    <div><label for="modal-message" class="block text-sm font-medium text-gray-700 mb-2">Lời
+                            nhắn</label> <textarea id="modal-message" rows="3"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <div class="flex items-start"><input type="checkbox" id="modal-agree" required
+                            class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"> <label
+                            for="modal-agree" class="ml-2 text-sm text-gray-600"> Tôi đồng ý với điều khoản &amp; chính
+                            sách bảo mật </label>
+                    </div>
+                    <div class="flex gap-3 pt-4"><button type="submit" class="btn-primary flex-1">Gửi thông tin</button>
+                        <button type="button" onclick="closeModal()" class="btn-secondary px-8">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!-- Toast Notification -->
+    <div id="toast"
+        class="fixed top-24 right-4 bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl hidden toast z-50">
+        <div class="flex items-center space-x-3">
+            <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd" />
+            </svg><span class="font-semibold">Gửi thành công! Chúng tôi sẽ liên hệ trong 24h.</span>
+        </div>
+    </div><!-- Floating Zalo Button -->
+    <button id="zalo-btn"
+        class="fixed bottom-6 right-6 w-14 h-14 bg-blue-500 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition z-40">
+        <span class="text-white text-2xl font-bold">Z</span>
+    </button>
+    <!-- Contact popup button (bottom-left) -->
+    <button id="contact-btn"
+        class="fixed bottom-6 left-6 w-14 h-14 bg-green-500 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition z-40 text-white font-bold">☎</button>
+    <div id="contact-popup" class="fixed bottom-20 left-6 bg-white rounded-2xl shadow-2xl p-4 hidden z-40"
+        style="width: 300px;">
+        <div class="flex items-start gap-3">
+            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">📞</div>
+            <div>
+                <div class="font-bold text-gray-900">Liên hệ nhanh</div>
+                <div class="text-sm text-gray-600">0123 456 789</div>
+                <div class="mt-3"><button class="btn-primary w-full"
+                        onclick="openModal(); document.getElementById('contact-popup').classList.add('hidden')">Nhận tư
+                        vấn</button></div>
+            </div>
+        </div>
+    </div>
+    <!-- Zalo Tooltip -->
+    <div id="zalo-tooltip" class="fixed bottom-24 right-6 bg-white rounded-2xl shadow-2xl p-6 hidden z-40"
+        style="width: 280px;">
+        <div class="text-center">
+            <h3 class="font-bold text-gray-900 mb-3">Chat với chúng tôi qua Zalo</h3>
+            <div
+                class="w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <span class="text-white text-4xl">QR</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Quét mã QR để chat Zalo</p><button
+                onclick="window.open('https://zalo.me', '_blank', 'noopener,noreferrer')" class="btn-primary w-full">Mở
+                Zalo</button>
+        </div>
+    </div>
+    <script>
+        // Default Config
+        const defaultConfig = {
+            site_title: "Trung Tâm Tiếng Trung",
+            hero_title: "Tìm trung tâm tiếng Trung uy tín",
+            hero_subtitle: "Nhanh chóng & minh bạch",
+            hero_description: "So sánh học phí, chất lượng, đánh giá thực tế từ học viên — tất cả trong một nơi.",
+            cta_primary: "Tìm trung tâm ngay",
+            cta_secondary: "Đăng ký trung tâm",
+            footer_description: "Nền tảng tìm kiếm & đánh giá trung tâm tiếng Trung minh bạch tại Việt Nam.",
+            contact_phone: "0123 456 789",
+            contact_email: "contact@example.com",
+            background_color: "#FFFFFF",
+            primary_color: "#25A9E0",
+            text_color: "#0F1724",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        // Navigation
+        function navigateTo(page) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            const target = document.getElementById(`page-${page}`);
+            if (target) target.classList.add('active');
+            window.scrollTo(0, 0);
+            // update active nav/menu links (any element with data-page)
+            document.querySelectorAll('[data-page]').forEach(a => {
+                try {
+                    if (a.dataset && a.dataset.page === page) a.classList.add('active'); else a.classList.remove('active');
+                } catch (e) { }
+            });
+            // If opening map page, try to set map query from hero filters
+            try {
+                if (page === 'map') {
+                    const q = window.HERO_FILTERS?.q || '';
+                    const city = window.HERO_FILTERS?.city || '';
+                    if (typeof setMapQuery === 'function') setMapQuery(q, city);
+                }
+            } catch (e) { }
+        }
+
+        // set initial active nav based on current visible page
+        (function setInitialActive() {
+            try {
+                const activeSection = document.querySelector('.page-section.active');
+                if (!activeSection) return;
+                const page = activeSection.id.replace(/^page-/, '');
+                // Toggle active class on any element that has a data-page attribute
+                document.querySelectorAll('[data-page]').forEach(a => {
+                    try {
+                        if (a.dataset && a.dataset.page === page) a.classList.add('active'); else a.classList.remove('active');
+                    } catch (e) { }
+                });
+            } catch (e) { }
+        })();
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+        }
+
+        // Modal
+        function openModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Toast
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Form Submissions
+        const modalForm = document.getElementById('modal-form');
+        if (modalForm) {
+            modalForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                closeModal();
+                showToast();
+                this.reset();
+            });
+        }
+
+        // Contact form (may be removed on pages where we use popup)
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                showToast();
+                this.reset();
+            });
+        }
+
+        // Center detail helper
+        function openCenterDetail(name) {
+            const title = document.getElementById('center-detail-name');
+            const desc = document.getElementById('center-detail-desc');
+            const rating = document.getElementById('center-detail-rating');
+            if (title) title.textContent = name;
+            if (desc) desc.textContent = 'Mô tả ngắn về ' + name + '. Thông tin học phí, lịch học, địa chỉ.';
+            if (rating) rating.textContent = '⭐ 4.8 • 120 đánh giá';
+            navigateTo('center-detail');
+            window.scrollTo(0, 0);
+        }
+
+        function addToCompare(name) {
+            // placeholder behaviour — you can implement full compare state later
+            alert('Đã thêm "' + name + '" vào bộ so sánh');
+        }
+
+        // Contact popup toggle
+        const contactBtn = document.getElementById('contact-btn');
+        const contactPopup = document.getElementById('contact-popup');
+        if (contactBtn && contactPopup) {
+            contactBtn.addEventListener('click', function () {
+                contactPopup.classList.toggle('hidden');
+            });
+        }
+
+        // Zalo Button
+        document.getElementById('zalo-btn').addEventListener('click', function () {
+            const tooltip = document.getElementById('zalo-tooltip');
+            tooltip.classList.toggle('hidden');
+        });
+
+        // Close modal on outside click
+        document.getElementById('modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Element SDK Integration
+        async function onConfigChange(config) {
+            // Update site title
+            const siteTitleEl = document.getElementById('site-title');
+            if (siteTitleEl) {
+                siteTitleEl.textContent = config.site_title || defaultConfig.site_title;
+            }
+
+            // Update hero section
+            const heroTitleEl = document.getElementById('hero-title');
+            if (heroTitleEl) {
+                heroTitleEl.textContent = config.hero_title || defaultConfig.hero_title;
+            }
+
+            const heroSubtitleEl = document.getElementById('hero-subtitle');
+            if (heroSubtitleEl) {
+                heroSubtitleEl.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+
+            const heroDescEl = document.getElementById('hero-description');
+            if (heroDescEl) {
+                heroDescEl.textContent = config.hero_description || defaultConfig.hero_description;
+            }
+
+            // Update CTAs
+            const ctaPrimaryEl = document.getElementById('cta-primary');
+            if (ctaPrimaryEl) {
+                ctaPrimaryEl.textContent = config.cta_primary || defaultConfig.cta_primary;
+            }
+
+            const ctaSecondaryEl = document.getElementById('cta-secondary');
+            if (ctaSecondaryEl) {
+                ctaSecondaryEl.textContent = config.cta_secondary || defaultConfig.cta_secondary;
+            }
+
+            // Update footer
+            const footerDescEl = document.getElementById('footer-description');
+            if (footerDescEl) {
+                footerDescEl.textContent = config.footer_description || defaultConfig.footer_description;
+            }
+
+            const footerEmailEl = document.getElementById('footer-email');
+            if (footerEmailEl) {
+                footerEmailEl.textContent = config.contact_email || defaultConfig.contact_email;
+            }
+
+            const footerPhoneEl = document.getElementById('footer-phone');
+            if (footerPhoneEl) {
+                footerPhoneEl.textContent = config.contact_phone || defaultConfig.contact_phone;
+            }
+
+            // Update contact page
+            const contactEmailEl = document.getElementById('contact-email-display');
+            if (contactEmailEl) {
+                contactEmailEl.textContent = config.contact_email || defaultConfig.contact_email;
+            }
+
+            const contactPhoneEl = document.getElementById('contact-phone-display');
+            if (contactPhoneEl) {
+                contactPhoneEl.textContent = config.contact_phone || defaultConfig.contact_phone;
+            }
+
+            // Apply colors
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const primaryColor = config.primary_color || defaultConfig.primary_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+
+            document.body.style.backgroundColor = backgroundColor;
+            document.body.style.color = textColor;
+
+            // Update primary buttons
+            document.querySelectorAll('.btn-primary').forEach(btn => {
+                btn.style.backgroundColor = primaryColor;
+            });
+
+            // Update secondary buttons
+            document.querySelectorAll('.btn-secondary').forEach(btn => {
+                btn.style.borderColor = primaryColor;
+                btn.style.color = primaryColor;
+            });
+
+            // Apply font
+            const fontFamily = config.font_family || defaultConfig.font_family;
+            const fontSize = config.font_size || defaultConfig.font_size;
+
+            document.body.style.fontFamily = `${fontFamily}, Inter, sans-serif`;
+            document.body.style.fontSize = `${fontSize}px`;
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                window.elementSdk.config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_color || defaultConfig.primary_color,
+                            set: (value) => {
+                                window.elementSdk.config.primary_color = value;
+                                window.elementSdk.setConfig({ primary_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                window.elementSdk.config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || defaultConfig.font_family,
+                        set: (value) => {
+                            window.elementSdk.config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: {
+                        get: () => config.font_size || defaultConfig.font_size,
+                        set: (value) => {
+                            window.elementSdk.config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["site_title", config.site_title || defaultConfig.site_title],
+                    ["hero_title", config.hero_title || defaultConfig.hero_title],
+                    ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                    ["hero_description", config.hero_description || defaultConfig.hero_description],
+                    ["cta_primary", config.cta_primary || defaultConfig.cta_primary],
+                    ["cta_secondary", config.cta_secondary || defaultConfig.cta_secondary],
+                    ["footer_description", config.footer_description || defaultConfig.footer_description],
+                    ["contact_phone", config.contact_phone || defaultConfig.contact_phone],
+                    ["contact_email", config.contact_email || defaultConfig.contact_email]
+                ])
+            });
+        }
+    </script>
+    <script>
+        // Fake data for centers, blogs, community — fields used by UI
+        const FAKE_CENTERS = [
+            { id: 1, name: 'Trung tâm Hán Ngữ Thăng Long', address: '123 Nguyễn Huệ, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7722, lng: 106.6996, price_from: 1500000, rating: 4.8, reviews: 120, tags: ['HSK 1-6', 'Lớp tối'], schedule: ['Tối', 'Cuối tuần'], phone: '0901111222', website: 'https://thanglong.edu.vn', desc: 'Trung tâm có kinh nghiệm nhiều năm, cam kết đầu ra cho học viên.' },
+            { id: 2, name: 'Trung tâm Ngữ Văn Trung Hoa', address: '45 Láng Hạ, Q.Đống Đa, Hà Nội', city: 'Hà Nội', district: 'Đống Đa', lat: 21.0018, lng: 105.8201, price_from: 1800000, rating: 4.9, reviews: 95, tags: ['Giao tiếp', 'Học thử'], schedule: ['Sáng', 'Chiều', 'Tối'], phone: '0912222333', website: '', desc: 'Chú trọng giao tiếp thực hành với giáo viên bản ngữ và Việt Nam giàu kinh nghiệm.' },
+            { id: 3, name: 'Học viện Hán Ngữ Quốc Tế', address: '78 Trần Phú, Q.Hải Châu, Đà Nẵng', city: 'Đà Nẵng', district: 'Hải Châu', lat: 16.0606, lng: 108.2202, price_from: 1200000, rating: 4.7, reviews: 88, tags: ['Online/Offline', 'Cuối tuần'], schedule: ['Cuối tuần', 'Sáng'], phone: '0933333444', website: '', desc: 'Linh hoạt online và offline, phù hợp người đi làm.' },
+            { id: 4, name: 'Trung tâm Văn Hóa Trung Quốc', address: '200 Nguyễn Đình Chiểu, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7785, lng: 106.6860, price_from: 2000000, rating: 4.6, reviews: 102, tags: ['Giáo viên bản ngữ', 'Giao tiếp'], schedule: ['Chiều', 'Tối'], phone: '0944444555', website: '', desc: 'Tập trung vào giao tiếp và văn hóa, lớp học tương tác cao.' },
+            { id: 5, name: 'Trung tâm Hoa Ngữ Sài Gòn', address: '56 Lê Lợi, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7746, lng: 106.6992, price_from: 1300000, rating: 4.5, reviews: 60, tags: ['HSK', 'Lớp sáng'], schedule: ['Sáng'], phone: '0908555666', website: '', desc: 'Gói học tiết kiệm, phù hợp người mới bắt đầu.' },
+            { id: 6, name: 'Trung tâm Bắc Kinh', address: '88 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội', city: 'Hà Nội', district: 'Hoàn Kiếm', lat: 21.0285, lng: 105.8520, price_from: 1700000, rating: 4.4, reviews: 50, tags: ['HSK 1-4'], schedule: ['Chiều'], phone: '0987777888', website: '', desc: 'Lớp nhỏ, chú trọng luyện thi HSK và phát âm chuẩn.' },
+            { id: 7, name: 'Trung tâm Ngôn Ngữ Hoa Việt', address: '12 Bạch Đằng, Ngô Quyền, Hải Phòng', city: 'Hải Phòng', district: 'Ngô Quyền', lat: 20.8460, lng: 106.6881, price_from: 1000000, rating: 4.3, reviews: 34, tags: ['Cuối tuần'], schedule: ['Cuối tuần'], phone: '0966666777', website: '', desc: 'Phù hợp học viên khu vực Hải Phòng, lịch học cuối tuần linh hoạt.' },
+            { id: 8, name: 'Trung tâm Trung Hoa Đông Á', address: '10 Phan Chu Trinh, Hai Bà Trưng, Hà Nội', city: 'Hà Nội', district: 'Hai Bà Trưng', lat: 21.0095, lng: 105.8562, price_from: 1400000, rating: 4.6, reviews: 70, tags: ['HSK 1-6', 'Giao tiếp'], schedule: ['Tối', 'Sáng'], phone: '0975999111', website: '', desc: 'Chuyên luyện HSK và các khóa giao tiếp ngắn hạn.' },
+            { id: 9, name: 'Trung tâm Tiếng Trung Phương Đông', address: '34 Điện Biên Phủ, Thanh Khê, Đà Nẵng', city: 'Đà Nẵng', district: 'Thanh Khê', lat: 16.0544, lng: 108.2110, price_from: 1100000, rating: 4.2, reviews: 28, tags: ['HSK', 'Giáo dục định hướng'], schedule: ['Sáng', 'Chiều'], phone: '0919000111', website: '', desc: 'Giáo trình thực tế, nhiều lớp luyện nói.' },
+            { id: 10, name: 'Trung tâm Hoa Ngữ An Bình', address: '7 Lý Tự Trọng, Quận 1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7729, lng: 106.6959, price_from: 1600000, rating: 4.7, reviews: 80, tags: ['HSK', 'Luyện nói'], schedule: ['Chiều', 'Tối'], phone: '0901222333', website: '', desc: 'Lớp luyện nói chuyên sâu, giáo viên nhiều kinh nghiệm.' },
+            { id: 11, name: 'Trung tâm Minh Thắng', address: '22A Trần Quang Khải, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7710, lng: 106.6920, price_from: 1250000, rating: 4.3, reviews: 44, tags: ['Lớp tối', 'HSK'], schedule: ['Tối'], phone: '0902333444', website: '', desc: 'Lớp tối linh hoạt, đội ngũ trẻ và nhiệt huyết.' },
+            { id: 12, name: 'Trung tâm Hoa Sen', address: '90A Nguyễn Chí Thanh, TP. Vinh', city: 'Nghệ An', district: 'Vinh', lat: 18.6666, lng: 105.6833, price_from: 900000, rating: 4.1, reviews: 22, tags: ['HSK', 'Cuối tuần'], schedule: ['Cuối tuần'], phone: '0911222333', website: '', desc: 'Chi phí thấp phù hợp học viên sinh viên.' },
+            { id: 13, name: 'Trung tâm Bắc Âu', address: '5 Hàng Bài, Hoàn Kiếm, Hà Nội', city: 'Hà Nội', district: 'Hoàn Kiếm', lat: 21.0280, lng: 105.8525, price_from: 1450000, rating: 4.5, reviews: 55, tags: ['HSK', 'Giao tiếp'], schedule: ['Sáng', 'Chiều'], phone: '0922333444', website: '', desc: 'Lớp căn bản và giao tiếp, phù hợp mọi lứa tuổi.' },
+            { id: 14, name: 'Trung tâm Á Châu', address: '120B Hai Bà Trưng, Hà Nội', city: 'Hà Nội', district: 'Hai Bà Trưng', lat: 21.0100, lng: 105.8530, price_from: 1550000, rating: 4.6, reviews: 68, tags: ['Lớp tối', 'HSK'], schedule: ['Tối'], phone: '0933444555', website: '', desc: 'Lớp tối tập trung cho người đi làm.' },
+            { id: 15, name: 'Trung tâm Vạn Xuân', address: '3 Núi Thành, Hải Châu, Đà Nẵng', city: 'Đà Nẵng', district: 'Hải Châu', lat: 16.0630, lng: 108.2230, price_from: 1100000, rating: 4.0, reviews: 18, tags: ['HSK'], schedule: ['Sáng'], phone: '0944555666', website: '', desc: 'Giá tốt, phù hợp học viên địa phương.' },
+            { id: 16, name: 'Trung tâm Minh Anh', address: '88 Lê Duẩn, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7750, lng: 106.7000, price_from: 1350000, rating: 4.4, reviews: 48, tags: ['Giao tiếp'], schedule: ['Chiều', 'Tối'], phone: '0955666777', website: '', desc: 'Chú trọng nói và luyện phản xạ giao tiếp.' },
+            { id: 17, name: 'Trung tâm Học Vui', address: '44 Trần Phú, Hải Phòng', city: 'Hải Phòng', district: 'Ngô Quyền', lat: 20.8450, lng: 106.6890, price_from: 980000, rating: 4.2, reviews: 30, tags: ['Cuối tuần', 'HSK'], schedule: ['Cuối tuần'], phone: '0961222333', website: '', desc: 'Lịch học cuối tuần, phù hợp người bận rộn.' },
+            { id: 18, name: 'Trung tâm Đại Dương', address: '2 Võ Thị Sáu, Nha Trang', city: 'Khánh Hòa', district: 'Nha Trang', lat: 12.2388, lng: 109.1967, price_from: 1050000, rating: 4.1, reviews: 12, tags: ['HSK'], schedule: ['Sáng'], phone: '0971222333', website: '', desc: 'Phù hợp học viên tại Nha Trang muốn học tiếng Trung.' },
+            { id: 19, name: 'Trung tâm Hòa Bình', address: '18 Phạm Ngọc Thạch, Đà Lạt', city: 'Lâm Đồng', district: 'Đà Lạt', lat: 11.9404, lng: 108.4583, price_from: 950000, rating: 4.0, reviews: 9, tags: ['Giao tiếp'], schedule: ['Chiều'], phone: '0981222333', website: '', desc: 'Lớp nhỏ, dễ tiếp thu.' },
+            { id: 20, name: 'Trung tâm Sài Gòn Mới', address: '210C Điện Biên Phủ, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7790, lng: 106.6930, price_from: 1450000, rating: 4.5, reviews: 76, tags: ['HSK', 'Lớp tối'], schedule: ['Tối'], phone: '0902111222', website: '', desc: 'Lớp tối chất lượng, nhiều khóa luyện thi.' },
+            { id: 21, name: 'Trung tâm Đông Phương', address: '55A Cách Mạng Tháng 8, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7780, lng: 106.6910, price_from: 1500000, rating: 4.6, reviews: 82, tags: ['Giáo viên bản ngữ'], schedule: ['Chiều', 'Tối'], phone: '0913111222', website: '', desc: 'Giáo viên bản ngữ, lớp tương tác cao.' },
+            { id: 22, name: 'Trung tâm Học Ngôn', address: '101 Lê Lợi, Buôn Ma Thuột', city: 'Đắk Lắk', district: 'Buôn Ma Thuột', lat: 12.6666, lng: 108.0500, price_from: 900000, rating: 4.1, reviews: 14, tags: ['HSK'], schedule: ['Sáng'], phone: '0931222333', website: '', desc: 'Trung tâm địa phương, giá phù hợp.' }
+        ];
+
+        const FAKE_BLOGS = [
+            { id: 1, title: '5 bí quyết học tiếng Trung hiệu quả cho người mới bắt đầu', tag: 'Kinh nghiệm học', date: '15/01/2025', read: '5 phút đọc', author: 'Nguyễn Văn A', excerpt: 'Chia sẻ phương pháp, timeline và tài liệu cho người mới bắt đầu.' },
+            { id: 2, title: 'Cấu trúc đề thi HSK 4 và chiến lược làm bài đạt điểm cao', tag: 'HSK', date: '12/01/2025', read: '8 phút đọc', author: 'Trần Thị B', excerpt: 'Phân tích đề, mẹo làm bài và bài tập mẫu.' },
+            { id: 3, title: 'Hướng dẫn xin học bổng du học Trung Quốc năm 2025', tag: 'Du học', date: '10/01/2025', read: '12 phút đọc', author: 'Lê Văn C', excerpt: 'Tổng hợp chương trình, hồ sơ cần thiết và timeline nộp đơn.' },
+            { id: 4, title: 'Lộ trình luyện HSK từ 0 đến 4 trong 1 năm', tag: 'Lộ trình', date: '05/12/2024', read: '7 phút đọc', author: 'Mai Thị D', excerpt: 'Lộ trình học chi tiết cho từng tháng kèm tài liệu tham khảo.' },
+            { id: 5, title: 'Top 10 từ vựng giao tiếp cần biết khi đi du lịch Trung Quốc', tag: 'Giao tiếp', date: '20/11/2024', read: '4 phút đọc', author: 'Hoàng Văn E', excerpt: 'Từ vựng thông dụng, mẫu câu và cách phát âm nhanh.' },
+            { id: 6, title: 'Kinh nghiệm tự học chữ Hán: viết đẹp và nhớ lâu', tag: 'Tự học', date: '01/10/2024', read: '6 phút đọc', author: 'Ngọc F', excerpt: 'Kỹ thuật luyện viết chữ Hán, flashcards và apps hữu ích.' }
+        ];
+
+        const FAKE_COMMUNITY = [
+            { id: 1, user: 'Nguyễn Minh Anh', role: 'HSK 4 learner', text: 'Mình vừa thi xong HSK 4 và đạt 280/300 điểm! Cảm ơn mọi người đã support.', likes: 124, comments: 32, date: '2 giờ trước' },
+            { id: 2, user: 'Trần Văn Tuấn', role: '', text: 'Các bạn có ai recommend trung tâm tốt ở Đống Đa cho lớp tối không?', likes: 8, comments: 15, date: '3 giờ trước' },
+            { id: 3, user: 'Hoàng Thu Hà', role: '', text: 'Share bộ tài liệu luyện viết chữ Hán cho người mới học nhé!', likes: 45, comments: 12, date: '5 giờ trước' },
+            { id: 4, user: 'Lê Thị Mai', role: 'Giáo viên', text: 'Mình mở lớp online luyện phát âm, ai muốn đăng ký ib nhé.', likes: 20, comments: 5, date: '1 ngày trước' },
+            { id: 5, user: 'Phạm Văn B', role: '', text: 'Có ai học qua trung tâm X ở Sài Gòn chưa? Review giúp mình với.', likes: 6, comments: 4, date: '2 ngày trước' },
+            { id: 6, user: 'Đỗ Lan', role: '', text: 'Mình đã qua buổi học thử, thấy GV rất nhiệt tình và truyền cảm hứng!', likes: 34, comments: 9, date: '3 ngày trước' }
+        ];
+
+        // Utility helpers
+        function formatVND(n) {
+            if (!n && n !== 0) return '';
+            return new Intl.NumberFormat('vi-VN').format(Math.round(n)) + 'đ';
+        }
+
+        if (typeof openGoogleMaps !== 'function') {
+            function openGoogleMaps(address) {
+                const url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+        }
+
+        // Safe renderers (only run if target containers exist)
+        function renderFakeCentersList(selector = '#centers-list') {
+            const container = document.querySelector(selector);
+            if (!container) return;
+            container.innerHTML = '';
+            FAKE_CENTERS.forEach(c => {
+                const el = document.createElement('div');
+                el.className = 'bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition flex items-start justify-between';
+                el.innerHTML = `
+                        <div>
+                            <h4 class="font-bold text-gray-900">${c.name}</h4>
+                            <div class="text-sm text-gray-600">${c.address} • <span class="rating-star">⭐ ${c.rating}</span></div>
+                            <div class="text-blue-600 font-semibold mt-2">Từ ${formatVND(c.price_from)}/tháng</div>
+                        </div>
+                        <div class="flex flex-col gap-2 w-40">
+                            <button class="btn-secondary" onclick="openCenterDetail('${c.name.replace(/'/g, '\\\'')}')">Chi tiết</button>
+                            <button class="btn-primary" onclick="openGoogleMaps('${c.address.replace(/'/g, "\\'")}')">Xem trên bản đồ</button>
+                        </div>
+                    `;
+                container.appendChild(el);
+            });
+        }
+
+        function renderFakeMapResults() {
+            const container = document.getElementById('map-results');
+            if (!container) return;
+            // clear existing results area except filters (if present)
+            // If container contains filter UI, try to append results area
+            // For simplicity, look for a child with class 'results-list' first
+            let resultsArea = container.querySelector('.results-list');
+            if (!resultsArea) {
+                resultsArea = document.createElement('div');
+                resultsArea.className = 'results-list space-y-4 mt-4';
+                container.appendChild(resultsArea);
+            }
+            resultsArea.innerHTML = '';
+            FAKE_CENTERS.forEach(c => {
+                const item = document.createElement('div');
+                item.className = 'bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition cursor-pointer';
+                item.innerHTML = `
+                        <h4 class="font-bold text-gray-900 mb-2">${c.name}</h4>
+                        <div class="text-sm text-gray-600 mb-2">${c.address}</div>
+                        <div class="flex gap-2"><button class="btn-secondary flex-1 text-sm py-2" onclick="openCenterDetail('${c.name.replace(/'/g, '\\\'')}')">Chi tiết</button> <button class="text-blue-500 text-sm py-2 px-4 hover:underline" onclick="openGoogleMaps('${c.address.replace(/'/g, "\\'")}')">Xem trên bản đồ</button></div>
+                    `;
+                resultsArea.appendChild(item);
+            });
+        }
+
+        // Map page specific filters + renderers
+        const USER_LOCATION = { lat: 21.0278, lng: 105.8342 }; // mock user location
+
+        function haversineDistance(lat1, lon1, lat2, lon2) {
+            function toRad(x) { return x * Math.PI / 180; }
+            const R = 6371; // km
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function applyMapFiltersAndRender() {
+            const proximity = document.getElementById('map-filter-proximity')?.value || 'near';
+            const price = document.getElementById('map-filter-price')?.value || 'under3';
+            const schedule = document.getElementById('map-filter-schedule')?.value || 'evening';
+
+            let filtered = FAKE_CENTERS.slice();
+
+            // name search is handled by the top search input; do not filter here
+
+            if (price === 'under3') {
+                filtered = filtered.filter(c => c.price_from < 3000000);
+            }
+
+            if (schedule === 'evening') {
+                filtered = filtered.filter(c => Array.isArray(c.schedule) && c.schedule.some(s => s.toLowerCase().includes('tối')));
+            }
+
+            if (proximity === 'near') {
+                filtered = filtered.map(c => ({ ...c, __dist_km: haversineDistance(USER_LOCATION.lat, USER_LOCATION.lng, c.lat, c.lng) }));
+                filtered.sort((a, b) => (a.__dist_km || 9999) - (b.__dist_km || 9999));
+            }
+
+            renderMapResultsGrid(filtered);
+
+            // center map on first result if available
+            if (filtered && filtered.length) {
+                try { setMapQuery(filtered[0].address); } catch (e) { }
+            }
+        }
+
+        function renderMapResultsGrid(list) {
+            const container = document.getElementById('map-results-wrapper') || document.getElementById('map-results') || document.getElementById('map-results-full');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (!list.length) {
+                const empty = document.createElement('div');
+                empty.className = 'text-sm text-gray-600';
+                empty.textContent = 'Không tìm thấy trung tâm phù hợp.';
+                container.appendChild(empty);
+                return;
+            }
+
+            // Controls wrapper: prev button, viewport, next button
+            const controls = document.createElement('div');
+            controls.className = 'carousel-controls';
+
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'carousel-btn';
+            prevBtn.setAttribute('aria-label', 'Previous');
+            prevBtn.innerHTML = '&#9664;';
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'carousel-btn';
+            nextBtn.setAttribute('aria-label', 'Next');
+            nextBtn.innerHTML = '&#9654;';
+
+            const viewport = document.createElement('div');
+            viewport.className = 'carousel-viewport';
+
+            const track = document.createElement('div');
+            track.className = 'map-carousel-track';
+
+            // build cards
+            list.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'result-card bg-white rounded-2xl shadow p-4 flex flex-col';
+                card.style.minWidth = 'var(--card-w)';
+                card.style.maxWidth = 'var(--card-w)';
+                card.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">漢</div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-gray-900 text-sm mb-1">${c.name}</h4>
+                            <div class="text-xs text-gray-600 mb-2">${c.address}</div>
+                            <div class="text-blue-600 font-semibold">Từ ${formatVND(c.price_from)}</div>
+                            <div class="flex items-center gap-2 text-xs text-gray-500 mt-2"><span class="rating-star">⭐ ${c.rating}</span> <span>• ${c.reviews} đánh giá</span></div>
+                            <div class="flex flex-wrap gap-2 mt-2">${(c.tags || []).map(t => `<span class="px-2 py-1 bg-gray-100 text-xs rounded-full">${t}</span>`).join('')}</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex gap-2 mt-auto">
+                        <button class="btn-secondary flex-1 text-sm" onclick="openCenterDetail('${c.name.replace(/'/g, "\\'")}')">Xem chi tiết</button>
+                        <button class="btn-primary flex-1 text-sm" onclick="openGoogleMaps('${c.address.replace(/'/g, "\\'")}')">Chỉ đường</button>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
+
+            viewport.appendChild(track);
+            controls.appendChild(prevBtn);
+            controls.appendChild(viewport);
+            controls.appendChild(nextBtn);
+            container.appendChild(controls);
+
+            // sliding behavior using transform for smooth slide animation
+            const first = track.querySelector('.result-card');
+            if (!first) return;
+            // ensure uniform height for cards
+            track.style.alignItems = 'stretch';
+            first.style.height = '100%';
+            track.style.transition = 'transform 380ms cubic-bezier(.22,.9,.3,1)';
+            track.style.willChange = 'transform';
+
+            function getCardMetrics() {
+                const cardRect = first.getBoundingClientRect();
+                const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
+                return { cardW: cardRect.width, gap };
+            }
+
+            function computeVisibleCount() {
+                const cardW = getCardMetrics().cardW || 1;
+                return Math.max(1, Math.floor(viewport.clientWidth / cardW));
+            }
+
+            let index = 0;
+            function updateTrack() {
+                const { cardW, gap } = getCardMetrics();
+                const step = cardW + gap;
+                const visible = computeVisibleCount();
+                const maxIndex = Math.max(0, list.length - visible);
+                if (index < 0) index = 0;
+                if (index > maxIndex) index = maxIndex;
+                const offset = index * step;
+                track.style.transform = `translateX(${-offset}px)`;
+            }
+
+            prevBtn.addEventListener('click', () => { index = Math.max(0, index - 1); updateTrack(); });
+            nextBtn.addEventListener('click', () => { index = Math.min(list.length - computeVisibleCount(), index + 1); updateTrack(); });
+
+            // keyboard support
+            prevBtn.addEventListener('keyup', (e) => { if (e.key === 'Enter') { index = Math.max(0, index - 1); updateTrack(); } });
+            nextBtn.addEventListener('keyup', (e) => { if (e.key === 'Enter') { index = Math.min(list.length - computeVisibleCount(), index + 1); updateTrack(); } });
+
+            // recalc on resize
+            window.addEventListener('resize', () => { updateTrack(); });
+
+            // ensure initial positioning
+            setTimeout(updateTrack, 50);
+        }
+
+        function renderFakeBlogs() {
+            const container = document.getElementById('blog-posts');
+            if (!container) return;
+            container.innerHTML = '';
+            FAKE_BLOGS.forEach(b => {
+                const a = document.createElement('article');
+                a.className = 'bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition';
+                a.innerHTML = `
+                        <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500"></div>
+                        <div class="p-6">
+                            <div class="flex items-center space-x-3 mb-3"><span class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">${b.tag}</span> <span class="text-sm text-gray-500">${b.date}</span></div>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-3">${b.title}</h2>
+                            <p class="text-gray-600 mb-4">${b.excerpt}</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3"><div class="w-10 h-10 bg-gray-200 rounded-full"></div><div><div class="font-semibold text-gray-900">${b.author}</div><div class="text-sm text-gray-500">${b.read}</div></div></div>
+                                <button class="text-blue-500 font-medium hover:underline">Đọc tiếp →</button>
+                            </div>
+                        </div>
+                    `;
+                container.appendChild(a);
+            });
+        }
+
+        function renderFakeCommunity() {
+            const container = document.getElementById('community-list');
+            if (!container) return;
+            container.innerHTML = '';
+            FAKE_COMMUNITY.forEach(p => {
+                const el = document.createElement('div');
+                el.className = 'bg-white border border-gray-200 rounded-xl p-4';
+                el.innerHTML = `
+                        <div class="flex items-center space-x-3 mb-3"><div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">${p.user.charAt(0)}</div><div><div class="font-semibold text-gray-900">${p.user}</div><div class="text-xs text-gray-500">${p.role} • ${p.date}</div></div></div>
+                        <p class="text-gray-700">${p.text}</p>
+                        <div class="flex items-center space-x-4 mt-3 text-sm text-gray-600"><span>❤️ ${p.likes}</span> <span>💬 ${p.comments}</span></div>
+                    `;
+                container.appendChild(el);
+            });
+        }
+
+        // Initialize renders if containers exist
+        document.addEventListener('DOMContentLoaded', () => {
+            try { renderFakeCentersList(); } catch (e) { /* ignore */ }
+            try { renderFakeMapResults(); } catch (e) { /* ignore */ }
+            try { renderFakeBlogs(); } catch (e) { /* ignore */ }
+            try { renderFakeCommunity(); } catch (e) { /* ignore */ }
+            try {
+                // wire up map page filters (if present)
+                document.getElementById('map-filter-apply')?.addEventListener('click', applyMapFiltersAndRender);
+                document.getElementById('map-filter-reset')?.addEventListener('click', function () {
+                    document.getElementById('map-filter-proximity').value = 'near';
+                    document.getElementById('map-filter-price').value = 'under3';
+                    document.getElementById('map-filter-schedule').value = 'evening';
+                    applyMapFiltersAndRender();
+                });
+                // apply filters on input change for a snappier feel
+                ['map-filter-proximity', 'map-filter-price', 'map-filter-schedule'].forEach(id => {
+                    document.getElementById(id)?.addEventListener('change', applyMapFiltersAndRender);
+                    document.getElementById(id)?.addEventListener('keyup', function (e) { if (e.key === 'Enter') applyMapFiltersAndRender(); });
+                });
+                // wire up map search button (top overlay)
+                document.getElementById('map-search-btn')?.addEventListener('click', function () {
+                    const q = document.getElementById('map-search-input')?.value || '';
+                    if (q.trim()) openGoogleMaps(q.trim());
+                });
+                // allow Enter to trigger search
+                document.getElementById('map-search-input')?.addEventListener('keyup', function (e) { if (e.key === 'Enter') { const q = this.value || ''; if (q.trim()) openGoogleMaps(q.trim()); } });
+                // initial render for map page
+                applyMapFiltersAndRender();
+            } catch (e) { /* ignore */ }
+        });
+    </script>
+    <script>
+        // Capture hero filters and navigate to map page
+        function applyHeroFiltersAndGoToMap() {
+            try {
+                var q = document.getElementById('hero-search-input')?.value || '';
+                var city = document.getElementById('hero-city-select')?.value || '';
+                window.HERO_FILTERS = { q: q, city: city };
+                // Try to populate map page inputs if they exist
+                setTimeout(function () {
+                    var mapSearch = document.querySelector('#map-search-input');
+                    var mapCity = document.querySelector('#map-city-select');
+                    if (mapSearch) mapSearch.value = q;
+                    if (mapCity) mapCity.value = city;
+                }, 80);
+                // Also set the map query if helper exists
+                try { if (typeof setMapQuery === 'function') setMapQuery(q, city); } catch (e) { }
+                navigateTo('map');
+            } catch (e) {
+                console.warn('applyHeroFiltersAndGoToMap error', e);
+                navigateTo('map');
+            }
+        }
+
+        // Set the main map iframe to show a query (q may be an address or keywords; city optional)
+        function setMapQuery(q, city) {
+            try {
+                var query = (q || '') + (city ? (' ' + city) : '');
+                if (!query) query = 'Vietnam';
+                var iframe = document.getElementById('main-map-iframe');
+                if (!iframe) return;
+                var src = 'https://www.google.com/maps?q=' + encodeURIComponent(query) + '&z=13&output=embed';
+                iframe.src = src;
+                // populate inputs on map page
+                var mapSearch = document.getElementById('map-search-input');
+                var mapCity = document.getElementById('map-city-select');
+                if (mapSearch) mapSearch.value = q || '';
+                if (mapCity) mapCity.value = city || '';
+            } catch (e) { console.warn('setMapQuery error', e); }
+        }
+
+        function onMapSearchClick() {
+            try {
+                var q = document.getElementById('map-search-input')?.value || '';
+                if (!q) return;
+                openGoogleMaps(q);
+            } catch (e) { console.warn(e); }
+        }
+    </script>
+</body>
+
+</html>
