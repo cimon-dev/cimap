@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CIMAP - Chinese Institute Map</title>
+    <link rel="icon" type="image/png" href="./images/logo.webp">
     <script src="/_sdk/element_sdk.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -440,12 +441,15 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20"><!-- Logo -->
                     <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
-                        <div
-                            class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
-                            <span class="text-white text-xl font-bold">中</span>
-                        </div><span id="site-title" class="text-xl font-bold text-gray-900 hidden sm:block">CIMAP -
-                            Chinese Institute Map</span>
-                    </div><!-- Search Bar (Desktop) -->
+                        <div class="w-10 h-10 rounded-xl overflow-hidden">
+                            <img src="./images/logo.webp" alt="CIMAP Logo" class="w-full h-full object-cover">
+                        </div>
+
+                        <span id="site-title" class="text-xl font-bold text-gray-900 hidden sm:block">
+                            CIMAP - Chinese Institute Map
+                        </span>
+                    </div>
+                    <!-- Search Bar (Desktop) -->
                     <div class="hidden md:flex flex-1 max-w-lg mx-8 relative">
                     </div><!-- Navigation (Desktop) -->
                     <nav class="hidden lg:flex items-center space-x-8 mx-auto"><a href="#" data-page="home"
@@ -593,151 +597,120 @@
                             <h2 class="text-3xl font-bold text-gray-900 mb-3">Trung tâm nổi bật trong tuần</h2>
                             <p class="text-gray-600">Được chọn dựa trên điểm đánh giá và độ tin cậy từ học viên</p>
                         </div>
-                        <div class="carousel-container flex gap-6 pb-4"><!-- Center Card 1 -->
+                        <div class="carousel-container flex gap-6 pb-4">
+
+                            <!-- Center 1 -->
                             <div class="carousel-item w-80 bg-white rounded-2xl shadow-lg p-6 card-hover">
                                 <div class="flex items-start space-x-4 mb-4">
                                     <div
-                                        class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-xl flex items-center justify-center">
                                         <span class="text-white text-2xl font-bold">漢</span>
                                     </div>
                                     <div class="flex-1">
-                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Trung tâm Hán Ngữ Thăng Long
-                                        </h3>
-                                        <div class="flex items-center space-x-1 mb-2"><span class="rating-star">⭐</span>
-                                            <span class="font-semibold text-gray-900">4.8</span> <span
-                                                class="text-sm text-gray-500">(120 đánh giá)</span>
+                                        <h3 class="font-bold text-lg text-gray-900 mb-1">THANHMAIHSK</h3>
+                                        <div class="flex items-center space-x-1 mb-2">
+                                            ⭐ <span class="font-semibold">4.95</span>
+                                            <span class="text-sm text-gray-500">(320 đánh giá)</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="space-y-3">
-                                    <div class="flex items-center text-sm text-gray-600">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg><span>Q.1, TP. Hồ Chí Minh</span>
+                                    <div class="text-sm text-gray-600">Đống Đa, Hà Nội</div>
+                                    <div class="text-blue-600 font-semibold">Từ 1.800.000đ/tháng</div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="tag">HSK 1-6</span>
+                                        <span class="tag">Luyện thi cấp tốc</span>
                                     </div>
-                                    <div class="text-blue-600 font-semibold">
-                                        Từ 1.500.000đ/tháng
-                                    </div>
-                                    <div class="flex flex-wrap gap-2"><span
-                                            class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Cam
-                                            kết đầu ra</span> <span
-                                            class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">Lớp
-                                            tối</span>
-                                    </div><button class="btn-secondary w-full mt-4"
-                                        onclick="openCenterDetail('Trung tâm Hán Ngữ Thăng Long')">Xem chi tiết</button>
+                                    <button class="btn-secondary w-full mt-4"
+                                        onclick="openCenterDetail('THANHMAIHSK')">Xem chi tiết</button>
                                 </div>
-                            </div><!-- Center Card 2 -->
+                            </div>
+
+                            <!-- Center 2 -->
                             <div class="carousel-item w-80 bg-white rounded-2xl shadow-lg p-6 card-hover">
                                 <div class="flex items-start space-x-4 mb-4">
                                     <div
-                                        class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
                                         <span class="text-white text-2xl font-bold">語</span>
                                     </div>
                                     <div class="flex-1">
-                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Trung tâm Ngữ Văn Trung Hoa
-                                        </h3>
-                                        <div class="flex items-center space-x-1 mb-2"><span class="rating-star">⭐</span>
-                                            <span class="font-semibold text-gray-900">4.9</span> <span
-                                                class="text-sm text-gray-500">(95 đánh giá)</span>
+                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Tiếng Trung Cầm Xu</h3>
+                                        <div class="flex items-center space-x-1 mb-2">
+                                            ⭐ <span class="font-semibold">4.94</span>
+                                            <span class="text-sm text-gray-500">(285 đánh giá)</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="space-y-3">
-                                    <div class="flex items-center text-sm text-gray-600">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg><span>Q.Đống Đa, Hà Nội</span>
+                                    <div class="text-sm text-gray-600">Ba Đình, Hà Nội</div>
+                                    <div class="text-blue-600 font-semibold">Từ 1.700.000đ/tháng</div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="tag">Giao tiếp</span>
+                                        <span class="tag">HSK</span>
                                     </div>
-                                    <div class="text-blue-600 font-semibold">
-                                        Từ 1.800.000đ/tháng
-                                    </div>
-                                    <div class="flex flex-wrap gap-2"><span
-                                            class="px-3 py-1 bg-purple-50 text-purple-600 text-xs font-medium rounded-full">HSK
-                                            1-6</span> <span
-                                            class="px-3 py-1 bg-orange-50 text-orange-600 text-xs font-medium rounded-full">Học
-                                            thử miễn phí</span>
-                                    </div><button class="btn-secondary w-full mt-4"
-                                        onclick="openCenterDetail('Trung tâm Ngữ Văn Trung Hoa')">Xem chi tiết</button>
+                                    <button class="btn-secondary w-full mt-4"
+                                        onclick="openCenterDetail('Tiếng Trung Cầm Xu')">Xem chi tiết</button>
                                 </div>
-                            </div><!-- Center Card 3 -->
+                            </div>
+
+                            <!-- Center 3 -->
                             <div class="carousel-item w-80 bg-white rounded-2xl shadow-lg p-6 card-hover">
                                 <div class="flex items-start space-x-4 mb-4">
                                     <div
-                                        class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center">
                                         <span class="text-white text-2xl font-bold">学</span>
                                     </div>
                                     <div class="flex-1">
-                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Học viện Hán Ngữ Quốc Tế</h3>
-                                        <div class="flex items-center space-x-1 mb-2"><span class="rating-star">⭐</span>
-                                            <span class="font-semibold text-gray-900">4.7</span> <span
-                                                class="text-sm text-gray-500">(88 đánh giá)</span>
+                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Trung tâm tiếng Trung Chinese
+                                        </h3>
+                                        <div class="flex items-center space-x-1 mb-2">
+                                            ⭐ <span class="font-semibold">4.93</span>
+                                            <span class="text-sm text-gray-500">(250 đánh giá)</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="space-y-3">
-                                    <div class="flex items-center text-sm text-gray-600">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg><span>Q.Hải Châu, Đà Nẵng</span>
+                                    <div class="text-sm text-gray-600">Thanh Xuân, Hà Nội</div>
+                                    <div class="text-blue-600 font-semibold">Từ 1.500.000đ/tháng</div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="tag">HSK</span>
+                                        <span class="tag">Luyện nói</span>
                                     </div>
-                                    <div class="text-blue-600 font-semibold">
-                                        Từ 1.200.000đ/tháng
-                                    </div>
-                                    <div class="flex flex-wrap gap-2"><span
-                                            class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Online/Offline</span>
-                                        <span
-                                            class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">Cuối
-                                            tuần</span>
-                                    </div><button class="btn-secondary w-full mt-4"
-                                        onclick="openCenterDetail('Học viện Hán Ngữ Quốc Tế')">Xem chi tiết</button>
+                                    <button class="btn-secondary w-full mt-4"
+                                        onclick="openCenterDetail('Trung tâm tiếng Trung Chinese')">Xem chi
+                                        tiết</button>
                                 </div>
-                            </div><!-- Center Card 4 -->
+                            </div>
+
+                            <!-- Center 4 -->
                             <div class="carousel-item w-80 bg-white rounded-2xl shadow-lg p-6 card-hover">
                                 <div class="flex items-start space-x-4 mb-4">
                                     <div
-                                        class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center">
                                         <span class="text-white text-2xl font-bold">文</span>
                                     </div>
                                     <div class="flex-1">
-                                        <h3 class="font-bold text-lg text-gray-900 mb-1">Trung tâm Văn Hóa Trung Quốc
-                                        </h3>
-                                        <div class="flex items-center space-x-1 mb-2"><span class="rating-star">⭐</span>
-                                            <span class="font-semibold text-gray-900">4.6</span> <span
-                                                class="text-sm text-gray-500">(102 đánh giá)</span>
+                                        <h3 class="font-bold text-lg text-gray-900 mb-1">ChineMaster</h3>
+                                        <div class="flex items-center space-x-1 mb-2">
+                                            ⭐ <span class="font-semibold">4.92</span>
+                                            <span class="text-sm text-gray-500">(270 đánh giá)</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="space-y-3">
-                                    <div class="flex items-center text-sm text-gray-600">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg><span>Q.3, TP. Hồ Chí Minh</span>
+                                    <div class="text-sm text-gray-600">Thanh Xuân, Hà Nội</div>
+                                    <div class="text-blue-600 font-semibold">Từ 1.900.000đ/tháng</div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="tag">HSK 1-6</span>
+                                        <span class="tag">Giáo viên bản ngữ</span>
                                     </div>
-                                    <div class="text-blue-600 font-semibold">
-                                        Từ 2.000.000đ/tháng
-                                    </div>
-                                    <div class="flex flex-wrap gap-2"><span
-                                            class="px-3 py-1 bg-red-50 text-red-600 text-xs font-medium rounded-full">Giáo
-                                            viên bản ngữ</span> <span
-                                            class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Giao
-                                            tiếp</span>
-                                    </div><button class="btn-secondary w-full mt-4"
-                                        onclick="openCenterDetail('Trung tâm Văn Hóa Trung Quốc')">Xem chi tiết</button>
+                                    <button class="btn-secondary w-full mt-4"
+                                        onclick="openCenterDetail('ChineMaster')">Xem chi tiết</button>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
                 </div>
                 <div class="py-16 bg-white">
@@ -745,126 +718,170 @@
                         <div class="grid lg:grid-cols-2 gap-12"><!-- Blog -->
                             <div>
                                 <div class="flex items-center justify-between mb-8">
-                                    <h2 class="text-3xl font-bold text-gray-900">Bài viết mới</h2><a href="#"
-                                        class="text-blue-500 font-medium hover:underline"
+                                    <h2 class="text-3xl font-bold text-gray-900">Bài viết mới</h2>
+                                    <a href="#" class="text-blue-500 font-medium hover:underline"
                                         onclick="navigateTo('blog'); return false;">Xem tất cả →</a>
                                 </div>
+
                                 <div class="space-y-6">
+
+                                    <!-- POST 1 -->
                                     <div
                                         class="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition">
-                                        <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500"></div>
-                                        <div class="p-6"><span
-                                                class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Kinh
-                                                nghiệm học</span>
-                                            <h3 class="text-xl font-bold text-gray-900 mt-3 mb-2">5 bí quyết học tiếng
-                                                Trung hiệu quả cho người mới bắt đầu</h3>
-                                            <p class="text-gray-600 mb-4">Chia sẻ từ những người đã đạt HSK 6 trong vòng
-                                                2 năm về phương pháp học tập khoa học...</p>
-                                            <div class="flex items-center text-sm text-gray-500"><span>15/01/2025</span>
-                                                <span class="mx-2">•</span> <span>5 phút đọc</span>
+                                        <div class="h-48 bg-cover bg-center"
+                                            style="background-image: url('https://hoalac.edu.vn/wp-content/uploads/2025/03/ba-quyat-gia-la_ba-quyat-gia-la_Muc-Hoa-Lac-co-gi-7_JeK7_fpVH.png');">
+                                        </div>
+
+                                        <div class="p-6">
+                                            <span
+                                                class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">
+                                                Kinh nghiệm học
+                                            </span>
+
+                                            <h3 class="text-xl font-bold text-gray-900 mt-3 mb-2">
+                                                5 bí quyết học tiếng Trung hiệu quả cho người mới bắt đầu
+                                            </h3>
+
+                                            <p class="text-gray-600 mb-4">
+                                                Chia sẻ từ những người đã đạt HSK 6 trong vòng 2 năm về phương pháp học
+                                                tập khoa học...
+                                            </p>
+
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <span>15/01/2025</span>
+                                                <span class="mx-2">•</span>
+                                                <span>5 phút đọc</span>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- POST 2 -->
                                     <div
                                         class="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition">
-                                        <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500"></div>
-                                        <div class="p-6"><span
-                                                class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">HSK</span>
-                                            <h3 class="text-xl font-bold text-gray-900 mt-3 mb-2">Cấu trúc đề thi HSK 4
-                                                và chiến lược làm bài đạt điểm cao</h3>
-                                            <p class="text-gray-600 mb-4">Phân tích chi tiết từng phần thi, thời gian
-                                                phân bổ và mẹo làm bài từ giáo viên có 10 năm kinh nghiệm...</p>
-                                            <div class="flex items-center text-sm text-gray-500"><span>12/01/2025</span>
-                                                <span class="mx-2">•</span> <span>8 phút đọc</span>
+                                        <div class="h-48 bg-cover bg-center"
+                                            style="background-image: url('https://cdn4.vieclam24h.vn/HSK_la_gi_02_19be1e60e2.jpeg');">
+                                        </div>
+
+                                        <div class="p-6">
+                                            <span
+                                                class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">
+                                                HSK
+                                            </span>
+
+                                            <h3 class="text-xl font-bold text-gray-900 mt-3 mb-2">
+                                                Cấu trúc đề thi HSK 4 và chiến lược làm bài đạt điểm cao
+                                            </h3>
+
+                                            <p class="text-gray-600 mb-4">
+                                                Phân tích chi tiết từng phần thi, thời gian phân bổ và mẹo làm bài từ
+                                                giáo viên có 10 năm kinh nghiệm...
+                                            </p>
+
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <span>12/01/2025</span>
+                                                <span class="mx-2">•</span>
+                                                <span>8 phút đọc</span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div><!-- Community -->
-                            <div>
-                                <div class="flex items-center justify-between mb-8">
-                                    <h2 class="text-3xl font-bold text-gray-900">Cộng đồng học viên</h2><a href="#"
-                                        class="text-blue-500 font-medium hover:underline"
-                                        onclick="navigateTo('blog'); return false;">Vào cộng đồng →</a>
-                                </div>
-                                <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 mb-6">
-                                    <div class="flex items-center space-x-3 mb-4">
-                                        <div
-                                            class="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
-                                            N
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-gray-900">
-                                                Nguyễn Minh Anh
-                                            </div>
-                                            <div class="text-sm text-gray-600">
-                                                HSK 4 learner
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="text-gray-700 mb-4">Mình vừa thi xong HSK 4 và đạt 280/300 điểm! Cảm ơn
-                                        các bạn trong group đã support mình suốt 6 tháng qua. Đặc biệt là phần nghe,
-                                        mình đã cải thiện rất nhiều nhờ các tips từ anh Tuấn và chị Hoa 🎉</p>
-                                    <div class="h-40 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-xl mb-4">
-                                    </div>
-                                    <div class="flex items-center space-x-6 text-sm text-gray-600"><button
-                                            class="flex items-center space-x-2 hover:text-blue-500 transition">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                            </svg><span>124 thích</span> </button> <button
-                                            class="flex items-center space-x-2 hover:text-blue-500 transition">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                            </svg><span>32 bình luận</span> </button>
-                                    </div>
-                                </div>
-                                <div class="space-y-4">
-                                    <div class="bg-white border border-gray-200 rounded-xl p-4">
-                                        <div class="flex items-center space-x-3 mb-3">
-                                            <div
-                                                class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                                T
-                                            </div>
-                                            <div>
-                                                <div class="font-semibold text-gray-900">
-                                                    Trần Văn Tuấn
-                                                </div>
-                                                <div class="text-xs text-gray-500">
-                                                    2 giờ trước
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-gray-700">Các bạn có thể gợi ý trung tâm tốt ở quận Đống Đa
-                                            không? Mình muốn học HSK 3, ưu tiên lớp tối.</p>
-                                        <div class="flex items-center space-x-4 mt-3 text-sm text-gray-600"><span>❤️
-                                                8</span> <span>💬 15</span>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white border border-gray-200 rounded-xl p-4">
-                                        <div class="flex items-center space-x-3 mb-3">
-                                            <div
-                                                class="w-10 h-10 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                                H
-                                            </div>
-                                            <div>
-                                                <div class="font-semibold text-gray-900">
-                                                    Hoàng Thu Hà
-                                                </div>
-                                                <div class="text-xs text-gray-500">
-                                                    5 giờ trước
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-gray-700">Share tài liệu luyện viết chữ Hán cho các bạn mới học
-                                            nè! 📝</p>
-                                        <div class="flex items-center space-x-4 mt-3 text-sm text-gray-600"><span>❤️
-                                                45</span> <span>💬 12</span>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
+
+                            <!-- ================= CỘNG ĐỒNG ================= -->
+
+                            <div>
+                                <div class="flex items-center justify-between mb-8">
+                                    <h2 class="text-3xl font-bold text-gray-900">Cộng đồng học viên</h2>
+                                    <a href="#" class="text-blue-500 font-medium hover:underline"
+                                        onclick="navigateTo('blog'); return false;">Vào cộng đồng →</a>
+                                </div>
+
+                                <!-- POST NỔI BẬT -->
+                                <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 mb-6">
+                                    <div class="flex items-center space-x-3 mb-4">
+                                        <div class="w-12 h-12 bg-cover bg-center rounded-full"
+                                            style="background-image: url('https://i.pravatar.cc/100?img=5');">
+                                        </div>
+
+                                        <div>
+                                            <div class="font-bold text-gray-900">Nguyễn Minh Anh</div>
+                                            <div class="text-sm text-gray-600">HSK 4 learner</div>
+                                        </div>
+                                    </div>
+
+                                    <p class="text-gray-700 mb-4">
+                                        Mình vừa thi xong HSK 4 và đạt 280/300 điểm! Cảm ơn các bạn trong group đã
+                                        support mình suốt 6 tháng qua...
+                                    </p>
+
+                                    <div class="h-40 bg-cover bg-center rounded-xl mb-4"
+                                        style="background-image: url('https://tiengtrungthuonghai.vn/wp-content/uploads/2020/02/bi-quyet-thi-hsk-dat-diem-cao.jpg');">
+                                    </div>
+
+                                    <div class="flex items-center space-x-6 text-sm text-gray-600">
+                                        <button class="flex items-center space-x-2 hover:text-blue-500 transition">
+                                            ❤️ <span>124 thích</span>
+                                        </button>
+
+                                        <button class="flex items-center space-x-2 hover:text-blue-500 transition">
+                                            💬 <span>32 bình luận</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- POST NGẮN 1 -->
+                                <div class="space-y-4">
+
+                                    <div class="bg-white border border-gray-200 rounded-xl p-4">
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            <div class="w-10 h-10 bg-cover bg-center rounded-full"
+                                                style="background-image: url('https://i.pravatar.cc/100?img=12');">
+                                            </div>
+
+                                            <div>
+                                                <div class="font-semibold text-gray-900">Trần Văn Tuấn</div>
+                                                <div class="text-xs text-gray-500">2 giờ trước</div>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-gray-700">
+                                            Các bạn có thể gợi ý trung tâm tốt ở quận Đống Đa không? Mình muốn học HSK
+                                            3, ưu tiên lớp tối.
+                                        </p>
+
+                                        <div class="flex items-center space-x-4 mt-3 text-sm text-gray-600">
+                                            <span>❤️ 8</span>
+                                            <span>💬 15</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- POST NGẮN 2 -->
+                                    <div class="bg-white border border-gray-200 rounded-xl p-4">
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            <div class="w-10 h-10 bg-cover bg-center rounded-full"
+                                                style="background-image: url('https://i.pravatar.cc/100?img=20');">
+                                            </div>
+
+                                            <div>
+                                                <div class="font-semibold text-gray-900">Hoàng Thu Hà</div>
+                                                <div class="text-xs text-gray-500">5 giờ trước</div>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-gray-700">
+                                            Share tài liệu luyện viết chữ Hán cho các bạn mới học nè! 📝
+                                        </p>
+
+                                        <div class="flex items-center space-x-4 mt-3 text-sm text-gray-600">
+                                            <span>❤️ 45</span>
+                                            <span>💬 12</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div><!-- Quick Compare -->
@@ -1172,7 +1189,7 @@
                     </div>
                 </div>
             </section>
-            <section id="page-blog" class="page-section">
+            <section id="page-blog" class="page-section hidden">
                 <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white py-16">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <h1 class="text-4xl lg:text-5xl font-bold mb-4">Cộng đồng &amp; Blog</h1>
@@ -1181,11 +1198,20 @@
                     </div>
                 </div>
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><!-- Tabs -->
-                    <div class="flex border-b border-gray-200 mb-8"><button
-                            class="px-6 py-3 font-semibold text-blue-600 border-b-2 border-blue-600">Blog</button>
-                        <button class="px-6 py-3 font-semibold text-gray-600 hover:text-blue-600 transition">Cộng
-                            đồng</button>
+                    <div class="flex border-b border-gray-200 mb-8">
+                        <button id="tab-blog" onclick="showPage('blog')"
+                            class="px-6 py-3 font-semibold text-blue-600 border-b-2 border-blue-600">
+                            Blog
+                        </button>
+
+                        <button id="tab-community" onclick="showPage('community')"
+                            class="px-6 py-3 font-semibold text-gray-600 hover:text-blue-600 transition">
+                            Cộng đồng
+                        </button>
+
                     </div>
+
+
                     <div class="grid lg:grid-cols-3 gap-8"><!-- Main Content -->
                         <div class="lg:col-span-2 space-y-8"><!-- Category Filter -->
                             <div class="flex flex-wrap gap-3"><button class="filter-chip active">Tất cả</button> <button
@@ -1194,103 +1220,134 @@
                                     Quốc</button> <button class="filter-chip">Văn hóa</button>
                             </div><!-- Blog Posts -->
                             <div class="space-y-6">
+
+                                <!-- ARTICLE 1 -->
                                 <article
                                     class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
-                                    <div class="h-64 bg-gradient-to-br from-blue-400 to-purple-500"></div>
+                                    <div class="h-64 bg-cover bg-center"
+                                        style="background-image: url('https://thedragon.edu.vn/wp-content/uploads/2024/05/shutterstock-1130976974-7226-1598703896-1.jpg');">
+                                    </div>
+
                                     <div class="p-6">
-                                        <div class="flex items-center space-x-3 mb-3"><span
-                                                class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">Kinh
-                                                nghiệm học</span> <span class="text-sm text-gray-500">15/01/2025</span>
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            <span
+                                                class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-full">
+                                                Kinh nghiệm học
+                                            </span>
+                                            <span class="text-sm text-gray-500">15/01/2025</span>
                                         </div>
+
                                         <h2
                                             class="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer">
-                                            5 bí quyết học tiếng Trung hiệu quả cho người mới bắt đầu</h2>
-                                        <p class="text-gray-600 mb-4">Chia sẻ từ những người đã đạt HSK 6 trong vòng 2
-                                            năm về phương pháp học tập khoa học, cách sắp xếp thời gian và duy trì động
-                                            lực học tập lâu dài...</p>
+                                            5 bí quyết học tiếng Trung hiệu quả cho người mới bắt đầu
+                                        </h2>
+
+                                        <p class="text-gray-600 mb-4">
+                                            Chia sẻ từ những người đã đạt HSK 6 trong vòng 2 năm về phương pháp học tập
+                                            khoa học...
+                                        </p>
+
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center space-x-3">
-                                                <div
-                                                    class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full">
+                                                <div class="w-10 h-10 bg-cover bg-center rounded-full"
+                                                    style="background-image: url('https://i.pravatar.cc/100?img=1');">
                                                 </div>
                                                 <div>
-                                                    <div class="font-semibold text-gray-900">
-                                                        Nguyễn Văn A
-                                                    </div>
-                                                    <div class="text-sm text-gray-500">
-                                                        5 phút đọc
-                                                    </div>
+                                                    <div class="font-semibold text-gray-900">Nguyễn Văn A</div>
+                                                    <div class="text-sm text-gray-500">5 phút đọc</div>
                                                 </div>
-                                            </div><button class="text-blue-500 font-medium hover:underline">Đọc tiếp
+                                            </div>
+
+                                            <button class="text-blue-500 font-medium hover:underline">Đọc tiếp
                                                 →</button>
                                         </div>
                                     </div>
                                 </article>
+
+                                <!-- ARTICLE 2 -->
                                 <article
                                     class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
-                                    <div class="h-64 bg-gradient-to-br from-green-400 to-blue-500"></div>
+                                    <div class="h-64 bg-cover bg-center"
+                                        style="background-image: url('https://cdn4.vieclam24h.vn/HSK_la_gi_02_19be1e60e2.jpeg');">
+                                    </div>
+
                                     <div class="p-6">
-                                        <div class="flex items-center space-x-3 mb-3"><span
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            <span
                                                 class="px-3 py-1 bg-green-50 text-green-600 text-xs font-medium rounded-full">HSK</span>
                                             <span class="text-sm text-gray-500">12/01/2025</span>
                                         </div>
+
                                         <h2
                                             class="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer">
-                                            Cấu trúc đề thi HSK 4 và chiến lược làm bài đạt điểm cao</h2>
-                                        <p class="text-gray-600 mb-4">Phân tích chi tiết từng phần thi, thời gian phân
-                                            bổ và mẹo làm bài từ giáo viên có 10 năm kinh nghiệm. Kèm theo bộ đề thi thử
-                                            và đáp án chi tiết...</p>
+                                            Cấu trúc đề thi HSK 4 và chiến lược làm bài đạt điểm cao
+                                        </h2>
+
+                                        <p class="text-gray-600 mb-4">
+                                            Phân tích chi tiết từng phần thi, thời gian phân bổ và mẹo làm bài...
+                                        </p>
+
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center space-x-3">
-                                                <div
-                                                    class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-full">
+                                                <div class="w-10 h-10 bg-cover bg-center rounded-full"
+                                                    style="background-image: url('https://i.pravatar.cc/100?img=2');">
                                                 </div>
                                                 <div>
-                                                    <div class="font-semibold text-gray-900">
-                                                        Trần Thị B
-                                                    </div>
-                                                    <div class="text-sm text-gray-500">
-                                                        8 phút đọc
-                                                    </div>
+                                                    <div class="font-semibold text-gray-900">Trần Thị B</div>
+                                                    <div class="text-sm text-gray-500">8 phút đọc</div>
                                                 </div>
-                                            </div><button class="text-blue-500 font-medium hover:underline">Đọc tiếp
+                                            </div>
+
+                                            <button class="text-blue-500 font-medium hover:underline">Đọc tiếp
                                                 →</button>
                                         </div>
                                     </div>
                                 </article>
+
+                                <!-- ARTICLE 3 -->
                                 <article
                                     class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
-                                    <div class="h-64 bg-gradient-to-br from-yellow-400 to-orange-500"></div>
+                                    <div class="h-64 bg-cover bg-center"
+                                        style="background-image: url('https://tiengtrungnguyenkhoi.vn/wp-content/uploads/2024/06/hoc-bong-csc-tiengtrungnguyenkhoi.png');">
+                                    </div>
+
                                     <div class="p-6">
-                                        <div class="flex items-center space-x-3 mb-3"><span
-                                                class="px-3 py-1 bg-yellow-50 text-yellow-600 text-xs font-medium rounded-full">Du
-                                                học</span> <span class="text-sm text-gray-500">10/01/2025</span>
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            <span
+                                                class="px-3 py-1 bg-yellow-50 text-yellow-600 text-xs font-medium rounded-full">
+                                                Du học
+                                            </span>
+                                            <span class="text-sm text-gray-500">10/01/2025</span>
                                         </div>
+
                                         <h2
                                             class="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer">
-                                            Hướng dẫn xin học bổng du học Trung Quốc năm 2025</h2>
-                                        <p class="text-gray-600 mb-4">Tổng hợp các chương trình học bổng toàn phần và
-                                            bán phần, điều kiện, hồ sơ cần thiết và timeline nộp đơn. Chia sẻ từ du học
-                                            sinh đang học tại Bắc Kinh...</p>
+                                            Hướng dẫn xin học bổng du học Trung Quốc năm 2025
+                                        </h2>
+
+                                        <p class="text-gray-600 mb-4">
+                                            Tổng hợp các chương trình học bổng toàn phần và bán phần...
+                                        </p>
+
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center space-x-3">
-                                                <div
-                                                    class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full">
+                                                <div class="w-10 h-10 bg-cover bg-center rounded-full"
+                                                    style="background-image: url('https://i.pravatar.cc/100?img=3');">
                                                 </div>
                                                 <div>
-                                                    <div class="font-semibold text-gray-900">
-                                                        Lê Văn C
-                                                    </div>
-                                                    <div class="text-sm text-gray-500">
-                                                        12 phút đọc
-                                                    </div>
+                                                    <div class="font-semibold text-gray-900">Lê Văn C</div>
+                                                    <div class="text-sm text-gray-500">12 phút đọc</div>
                                                 </div>
-                                            </div><button class="text-blue-500 font-medium hover:underline">Đọc tiếp
+                                            </div>
+
+                                            <button class="text-blue-500 font-medium hover:underline">Đọc tiếp
                                                 →</button>
                                         </div>
                                     </div>
                                 </article>
-                            </div><!-- Pagination -->
+
+                            </div>
+                            <!-- Pagination -->
                             <div class="flex justify-center space-x-2"><button
                                     class="w-10 h-10 rounded-lg border border-gray-200 hover:bg-gray-50 transition">←</button>
                                 <button class="w-10 h-10 rounded-lg bg-blue-500 text-white font-semibold">1</button>
@@ -1317,39 +1374,58 @@
                             </div><!-- Popular Posts -->
                             <div class="bg-white rounded-2xl shadow-lg p-6">
                                 <h3 class="font-bold text-gray-900 mb-4">Bài viết nổi bật</h3>
-                                <div class="space-y-4"><a href="#" class="block hover:text-blue-600 transition">
+                                <div class="space-y-4">
+
+                                    <!-- ITEM 1 -->
+                                    <a href="#" class="block hover:text-blue-600 transition">
                                         <div class="flex space-x-3">
-                                            <div
-                                                class="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex-shrink-0">
+                                            <div class="w-16 h-16 rounded-lg flex-shrink-0 bg-cover bg-center"
+                                                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6I1q-n8ifnZXGI59TEfsA2lAvWI9zAe-49g&s');">
                                             </div>
+
                                             <div class="flex-1">
-                                                <h4 class="font-semibold text-sm mb-1">Top 10 trung tâm tiếng Trung uy
-                                                    tín nhất Hà Nội</h4><span class="text-xs text-gray-500">1.2k lượt
-                                                    xem</span>
-                                            </div>
-                                        </div>
-                                    </a> <a href="#" class="block hover:text-blue-600 transition">
-                                        <div class="flex space-x-3">
-                                            <div
-                                                class="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex-shrink-0">
-                                            </div>
-                                            <div class="flex-1">
-                                                <h4 class="font-semibold text-sm mb-1">Lộ trình học HSK từ 0 đến 6 trong
-                                                    2 năm</h4><span class="text-xs text-gray-500">980 lượt xem</span>
-                                            </div>
-                                        </div>
-                                    </a> <a href="#" class="block hover:text-blue-600 transition">
-                                        <div class="flex space-x-3">
-                                            <div
-                                                class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex-shrink-0">
-                                            </div>
-                                            <div class="flex-1">
-                                                <h4 class="font-semibold text-sm mb-1">So sánh học phí các trung tâm tại
-                                                    TP.HCM</h4><span class="text-xs text-gray-500">850 lượt xem</span>
+                                                <h4 class="font-semibold text-sm mb-1">
+                                                    Top 10 trung tâm tiếng Trung uy tín nhất Hà Nội
+                                                </h4>
+                                                <span class="text-xs text-gray-500">1.2k lượt xem</span>
                                             </div>
                                         </div>
                                     </a>
+
+                                    <!-- ITEM 2 -->
+                                    <a href="#" class="block hover:text-blue-600 transition">
+                                        <div class="flex space-x-3">
+                                            <div class="w-16 h-16 rounded-lg flex-shrink-0 bg-cover bg-center"
+                                                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5Xj_oyEg7vf2Iwoj4GOxSWvm_GtXWipXdxg&s');">
+                                            </div>
+
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-sm mb-1">
+                                                    Lộ trình học HSK từ 0 đến 6 trong 2 năm
+                                                </h4>
+                                                <span class="text-xs text-gray-500">980 lượt xem</span>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <!-- ITEM 3 -->
+                                    <a href="#" class="block hover:text-blue-600 transition">
+                                        <div class="flex space-x-3">
+                                            <div class="w-16 h-16 rounded-lg flex-shrink-0 bg-cover bg-center"
+                                                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5FHE1j_XmyGUaqbDJSE6e04tJJCpPNAoM8Q&s');">
+                                            </div>
+
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-sm mb-1">
+                                                    So sánh học phí các trung tâm tại TP.HCM
+                                                </h4>
+                                                <span class="text-xs text-gray-500">850 lượt xem</span>
+                                            </div>
+                                        </div>
+                                    </a>
+
                                 </div>
+
                             </div><!-- Newsletter -->
                             <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
                                 <h3 class="font-bold text-xl mb-2">Nhận bài viết mới</h3>
@@ -1362,7 +1438,40 @@
                         </div>
                     </div>
                 </div>
-            </section><!-- ABOUT PAGE -->
+            </section>
+            <section id="page-community" class="page-section hidden">
+
+                <div class="bg-gradient-to-br from-green-500 to-teal-600 text-white py-16">
+                    <div class="max-w-7xl mx-auto px-4 text-center">
+                        <h1 class="text-4xl font-bold mb-4">Cộng đồng học tiếng Trung</h1>
+                        <p class="text-xl text-green-100">Hỏi đáp – Chia sẻ – Review trung tâm</p>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-3 gap-8">
+
+                    <!-- MAIN -->
+                    <div class="lg:col-span-2 space-y-6" id="community-list">
+                        <!-- JS sẽ render community tại đây -->
+                    </div>
+
+                    <!-- SIDEBAR -->
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h3 class="font-bold mb-4">Hoạt động nổi bật</h3>
+                            <ul class="space-y-3 text-sm text-gray-700">
+                                <li>• 120 bài viết tuần này</li>
+                                <li>• 85 thành viên mới</li>
+                                <li>• 15 bài review trung tâm</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ABOUT PAGE -->
             <section id="page-about" class="page-section">
                 <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white py-16">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -1442,8 +1551,11 @@
                             </div>
                         </div>
                         <div class="relative">
-                            <div class="w-full h-96 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl"></div>
+                            <div class="w-full h-96 rounded-3xl bg-cover bg-center"
+                                style="background-image: url('https://www.datocms-assets.com/23428/1730301376-1690463625-teamwork-hi-five-1-1.jpg?auto=compress');">
+                            </div>
                         </div>
+
                     </div><!-- Journey Timeline -->
                     <div class="mb-20">
                         <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Hành trình phát triển</h2>
@@ -1515,35 +1627,56 @@
                     </div><!-- Team -->
                     <div class="mb-20">
                         <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Đội ngũ của chúng tôi</h2>
-                        <div class="grid md:grid-cols-3 gap-8">
+
+                        <div class="grid md:grid-cols-4 gap-8">
+
+                            <!-- Member 1 -->
                             <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
-                                <div
-                                    class="w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full mx-auto mb-4">
+                                <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-cover bg-center"
+                                    style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9UlCVILUAEQfGNnPKIh_iF0_BQnPf4V0gfw&s');">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1">Nguyễn Văn A</h3>
-                                <p class="text-blue-600 font-medium mb-3">Founder &amp; CEO</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Nguyễn Khánh Linh</h3>
+                                <p class="text-blue-600 font-medium mb-3">Founder & CEO</p>
                                 <p class="text-gray-600 text-sm">10 năm kinh nghiệm trong lĩnh vực giáo dục và công nghệ
                                 </p>
                             </div>
+
+                            <!-- Member 2 -->
                             <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
-                                <div
-                                    class="w-24 h-24 bg-gradient-to-br from-green-400 to-blue-500 rounded-full mx-auto mb-4">
+                                <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-cover bg-center"
+                                    style="background-image: url(./images/phuong\ anh.jpg);">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1">Trần Thị B</h3>
-                                <p class="text-blue-600 font-medium mb-3">Head of Content</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Lưu Phương Anh</h3>
+                                <p class="text-blue-600 font-medium mb-3">Co founder - Giám đốc quản lý vận hành</p>
                                 <p class="text-gray-600 text-sm">Giảng viên tiếng Trung với chứng chỉ HSK 6 và 8 năm
                                     kinh nghiệm</p>
                             </div>
+
+                            <!-- Member 3 -->
                             <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
-                                <div
-                                    class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mx-auto mb-4">
+                                <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-cover bg-center"
+                                    style="background-image: url(./images/mai\ chi.jpg);">
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-1">Lê Văn C</h3>
-                                <p class="text-blue-600 font-medium mb-3">Tech Lead</p>
-                                <p class="text-gray-600 text-sm">Chuyên gia phát triển web với 12 năm kinh nghiệm</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Nguyễn Mai Chi</h3>
+                                <p class="text-blue-600 font-medium mb-3">Co founder - Giám đốc học thuật </p>
+                                <p class="text-gray-600 text-sm">Chuyên gia phát triển với 12 năm kinh nghiệm</p>
                             </div>
+
+                            <!-- ✅ Member 4 (MỚI) -->
+                            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition">
+                                <div class="w-24 h-24 rounded-full mx-auto mb-4 bg-cover bg-center"
+                                    style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9UlCVILUAEQfGNnPKIh_iF0_BQnPf4V0gfw&s');">
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Lương Thị Mỹ Duyên</h3>
+                                <p class="text-blue-600 font-medium mb-3">Co founder - Giám đốc Marketing & HR</p>
+                                <p class="text-gray-600 text-sm">Chuyên gia chiến lược marketing giáo dục với 7 năm kinh
+                                    nghiệm</p>
+                            </div>
+
                         </div>
-                    </div><!-- FAQ -->
+                    </div>
+
+                    <!-- FAQ -->
                     <div>
                         <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Câu hỏi thường gặp</h2>
                         <div class="max-w-3xl mx-auto space-y-4">
@@ -1996,29 +2129,37 @@
     <script>
         // Fake data for centers, blogs, community — fields used by UI
         const FAKE_CENTERS = [
-            { id: 1, name: 'Trung tâm Hán Ngữ Thăng Long', address: '123 Nguyễn Huệ, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7722, lng: 106.6996, price_from: 1500000, rating: 4.8, reviews: 120, tags: ['HSK 1-6', 'Lớp tối'], schedule: ['Tối', 'Cuối tuần'], phone: '0901111222', website: 'https://thanglong.edu.vn', desc: 'Trung tâm có kinh nghiệm nhiều năm, cam kết đầu ra cho học viên.' },
-            { id: 2, name: 'Trung tâm Ngữ Văn Trung Hoa', address: '45 Láng Hạ, Q.Đống Đa, Hà Nội', city: 'Hà Nội', district: 'Đống Đa', lat: 21.0018, lng: 105.8201, price_from: 1800000, rating: 4.9, reviews: 95, tags: ['Giao tiếp', 'Học thử'], schedule: ['Sáng', 'Chiều', 'Tối'], phone: '0912222333', website: '', desc: 'Chú trọng giao tiếp thực hành với giáo viên bản ngữ và Việt Nam giàu kinh nghiệm.' },
-            { id: 3, name: 'Học viện Hán Ngữ Quốc Tế', address: '78 Trần Phú, Q.Hải Châu, Đà Nẵng', city: 'Đà Nẵng', district: 'Hải Châu', lat: 16.0606, lng: 108.2202, price_from: 1200000, rating: 4.7, reviews: 88, tags: ['Online/Offline', 'Cuối tuần'], schedule: ['Cuối tuần', 'Sáng'], phone: '0933333444', website: '', desc: 'Linh hoạt online và offline, phù hợp người đi làm.' },
-            { id: 4, name: 'Trung tâm Văn Hóa Trung Quốc', address: '200 Nguyễn Đình Chiểu, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7785, lng: 106.6860, price_from: 2000000, rating: 4.6, reviews: 102, tags: ['Giáo viên bản ngữ', 'Giao tiếp'], schedule: ['Chiều', 'Tối'], phone: '0944444555', website: '', desc: 'Tập trung vào giao tiếp và văn hóa, lớp học tương tác cao.' },
-            { id: 5, name: 'Trung tâm Hoa Ngữ Sài Gòn', address: '56 Lê Lợi, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7746, lng: 106.6992, price_from: 1300000, rating: 4.5, reviews: 60, tags: ['HSK', 'Lớp sáng'], schedule: ['Sáng'], phone: '0908555666', website: '', desc: 'Gói học tiết kiệm, phù hợp người mới bắt đầu.' },
-            { id: 6, name: 'Trung tâm Bắc Kinh', address: '88 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội', city: 'Hà Nội', district: 'Hoàn Kiếm', lat: 21.0285, lng: 105.8520, price_from: 1700000, rating: 4.4, reviews: 50, tags: ['HSK 1-4'], schedule: ['Chiều'], phone: '0987777888', website: '', desc: 'Lớp nhỏ, chú trọng luyện thi HSK và phát âm chuẩn.' },
-            { id: 7, name: 'Trung tâm Ngôn Ngữ Hoa Việt', address: '12 Bạch Đằng, Ngô Quyền, Hải Phòng', city: 'Hải Phòng', district: 'Ngô Quyền', lat: 20.8460, lng: 106.6881, price_from: 1000000, rating: 4.3, reviews: 34, tags: ['Cuối tuần'], schedule: ['Cuối tuần'], phone: '0966666777', website: '', desc: 'Phù hợp học viên khu vực Hải Phòng, lịch học cuối tuần linh hoạt.' },
-            { id: 8, name: 'Trung tâm Trung Hoa Đông Á', address: '10 Phan Chu Trinh, Hai Bà Trưng, Hà Nội', city: 'Hà Nội', district: 'Hai Bà Trưng', lat: 21.0095, lng: 105.8562, price_from: 1400000, rating: 4.6, reviews: 70, tags: ['HSK 1-6', 'Giao tiếp'], schedule: ['Tối', 'Sáng'], phone: '0975999111', website: '', desc: 'Chuyên luyện HSK và các khóa giao tiếp ngắn hạn.' },
-            { id: 9, name: 'Trung tâm Tiếng Trung Phương Đông', address: '34 Điện Biên Phủ, Thanh Khê, Đà Nẵng', city: 'Đà Nẵng', district: 'Thanh Khê', lat: 16.0544, lng: 108.2110, price_from: 1100000, rating: 4.2, reviews: 28, tags: ['HSK', 'Giáo dục định hướng'], schedule: ['Sáng', 'Chiều'], phone: '0919000111', website: '', desc: 'Giáo trình thực tế, nhiều lớp luyện nói.' },
-            { id: 10, name: 'Trung tâm Hoa Ngữ An Bình', address: '7 Lý Tự Trọng, Quận 1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7729, lng: 106.6959, price_from: 1600000, rating: 4.7, reviews: 80, tags: ['HSK', 'Luyện nói'], schedule: ['Chiều', 'Tối'], phone: '0901222333', website: '', desc: 'Lớp luyện nói chuyên sâu, giáo viên nhiều kinh nghiệm.' },
-            { id: 11, name: 'Trung tâm Minh Thắng', address: '22A Trần Quang Khải, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7710, lng: 106.6920, price_from: 1250000, rating: 4.3, reviews: 44, tags: ['Lớp tối', 'HSK'], schedule: ['Tối'], phone: '0902333444', website: '', desc: 'Lớp tối linh hoạt, đội ngũ trẻ và nhiệt huyết.' },
-            { id: 12, name: 'Trung tâm Hoa Sen', address: '90A Nguyễn Chí Thanh, TP. Vinh', city: 'Nghệ An', district: 'Vinh', lat: 18.6666, lng: 105.6833, price_from: 900000, rating: 4.1, reviews: 22, tags: ['HSK', 'Cuối tuần'], schedule: ['Cuối tuần'], phone: '0911222333', website: '', desc: 'Chi phí thấp phù hợp học viên sinh viên.' },
-            { id: 13, name: 'Trung tâm Bắc Âu', address: '5 Hàng Bài, Hoàn Kiếm, Hà Nội', city: 'Hà Nội', district: 'Hoàn Kiếm', lat: 21.0280, lng: 105.8525, price_from: 1450000, rating: 4.5, reviews: 55, tags: ['HSK', 'Giao tiếp'], schedule: ['Sáng', 'Chiều'], phone: '0922333444', website: '', desc: 'Lớp căn bản và giao tiếp, phù hợp mọi lứa tuổi.' },
-            { id: 14, name: 'Trung tâm Á Châu', address: '120B Hai Bà Trưng, Hà Nội', city: 'Hà Nội', district: 'Hai Bà Trưng', lat: 21.0100, lng: 105.8530, price_from: 1550000, rating: 4.6, reviews: 68, tags: ['Lớp tối', 'HSK'], schedule: ['Tối'], phone: '0933444555', website: '', desc: 'Lớp tối tập trung cho người đi làm.' },
-            { id: 15, name: 'Trung tâm Vạn Xuân', address: '3 Núi Thành, Hải Châu, Đà Nẵng', city: 'Đà Nẵng', district: 'Hải Châu', lat: 16.0630, lng: 108.2230, price_from: 1100000, rating: 4.0, reviews: 18, tags: ['HSK'], schedule: ['Sáng'], phone: '0944555666', website: '', desc: 'Giá tốt, phù hợp học viên địa phương.' },
-            { id: 16, name: 'Trung tâm Minh Anh', address: '88 Lê Duẩn, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7750, lng: 106.7000, price_from: 1350000, rating: 4.4, reviews: 48, tags: ['Giao tiếp'], schedule: ['Chiều', 'Tối'], phone: '0955666777', website: '', desc: 'Chú trọng nói và luyện phản xạ giao tiếp.' },
-            { id: 17, name: 'Trung tâm Học Vui', address: '44 Trần Phú, Hải Phòng', city: 'Hải Phòng', district: 'Ngô Quyền', lat: 20.8450, lng: 106.6890, price_from: 980000, rating: 4.2, reviews: 30, tags: ['Cuối tuần', 'HSK'], schedule: ['Cuối tuần'], phone: '0961222333', website: '', desc: 'Lịch học cuối tuần, phù hợp người bận rộn.' },
-            { id: 18, name: 'Trung tâm Đại Dương', address: '2 Võ Thị Sáu, Nha Trang', city: 'Khánh Hòa', district: 'Nha Trang', lat: 12.2388, lng: 109.1967, price_from: 1050000, rating: 4.1, reviews: 12, tags: ['HSK'], schedule: ['Sáng'], phone: '0971222333', website: '', desc: 'Phù hợp học viên tại Nha Trang muốn học tiếng Trung.' },
-            { id: 19, name: 'Trung tâm Hòa Bình', address: '18 Phạm Ngọc Thạch, Đà Lạt', city: 'Lâm Đồng', district: 'Đà Lạt', lat: 11.9404, lng: 108.4583, price_from: 950000, rating: 4.0, reviews: 9, tags: ['Giao tiếp'], schedule: ['Chiều'], phone: '0981222333', website: '', desc: 'Lớp nhỏ, dễ tiếp thu.' },
-            { id: 20, name: 'Trung tâm Sài Gòn Mới', address: '210C Điện Biên Phủ, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7790, lng: 106.6930, price_from: 1450000, rating: 4.5, reviews: 76, tags: ['HSK', 'Lớp tối'], schedule: ['Tối'], phone: '0902111222', website: '', desc: 'Lớp tối chất lượng, nhiều khóa luyện thi.' },
-            { id: 21, name: 'Trung tâm Đông Phương', address: '55A Cách Mạng Tháng 8, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7780, lng: 106.6910, price_from: 1500000, rating: 4.6, reviews: 82, tags: ['Giáo viên bản ngữ'], schedule: ['Chiều', 'Tối'], phone: '0913111222', website: '', desc: 'Giáo viên bản ngữ, lớp tương tác cao.' },
-            { id: 22, name: 'Trung tâm Học Ngôn', address: '101 Lê Lợi, Buôn Ma Thuột', city: 'Đắk Lắk', district: 'Buôn Ma Thuột', lat: 12.6666, lng: 108.0500, price_from: 900000, rating: 4.1, reviews: 14, tags: ['HSK'], schedule: ['Sáng'], phone: '0931222333', website: '', desc: 'Trung tâm địa phương, giá phù hợp.' }
+            { id: 1, name: 'THANHMAIHSK', address: 'Số 9 ngõ 49 Huỳnh Thúc Kháng, quận Đống Đa, Hà Nội', city: 'Hà Nội', district: 'Đống Đa', lat: 21.0169, lng: 105.8146, price_from: 1800000, rating: 4.95, reviews: 320, tags: ['HSK 1-6', 'Luyện thi cấp tốc', 'Online/Offline'], schedule: ['Sáng', 'Chiều', 'Tối'], phone: '0988111222', website: '', desc: 'Trung tâm luyện thi HSK hàng đầu, tỷ lệ đỗ cao, giáo trình chuyên sâu.' },
+            { id: 2, name: 'Tiếng Trung Cầm Xu', address: 'Số 17/575 Kim Mã, Hà Nội', city: 'Hà Nội', district: 'Ba Đình', lat: 21.0313, lng: 105.8196, price_from: 1700000, rating: 4.94, reviews: 285, tags: ['Giao tiếp', 'HSK', 'Online'], schedule: ['Chiều', 'Tối'], phone: '0977333444', website: '', desc: 'Nổi tiếng với các khóa giao tiếp bài bản và luyện thi HSK thực chiến.' },
+            { id: 3, name: 'Trung tâm tiếng Trung Chinese', address: 'Số 47 ngõ 168 Nguyễn Xiển, quận Thanh Xuân, Hà Nội', city: 'Hà Nội', district: 'Thanh Xuân', lat: 20.9899, lng: 105.8039, price_from: 1500000, rating: 4.93, reviews: 250, tags: ['HSK', 'Luyện nói', 'Lớp tối'], schedule: ['Chiều', 'Tối'], phone: '0968333444', website: '', desc: 'Chuyên luyện nói và phản xạ giao tiếp cho sinh viên và người đi làm.' },
+            { id: 4, name: 'ChineMaster', address: 'Số 1 ngõ 48 Phố Tô Vĩnh Diện, phường Khương Trung, quận Thanh Xuân, Hà Nội', city: 'Hà Nội', district: 'Thanh Xuân', lat: 20.9986, lng: 105.8282, price_from: 1900000, rating: 4.92, reviews: 270, tags: ['HSK 1-6', 'Giáo viên bản ngữ'], schedule: ['Sáng', 'Chiều', 'Tối'], phone: '0918333444', website: '', desc: 'Đào tạo chuyên sâu theo chuẩn quốc tế, luyện thi HSK cấp tốc.' },
+            { id: 5, name: 'SOFL', address: '365 Phố Vọng, quận Hai Bà Trưng, Hà Nội', city: 'Hà Nội', district: 'Hai Bà Trưng', lat: 20.9992, lng: 105.8411, price_from: 2000000, rating: 4.91, reviews: 340, tags: ['HSK', 'Du học', 'Giao tiếp'], schedule: ['Sáng', 'Chiều', 'Tối'], phone: '0909333444', website: '', desc: 'Hệ thống đào tạo ngoại ngữ lớn, chuyên luyện HSK và tư vấn du học.' },
+            { id: 6, name: 'Tiếng Trung JPTIP', address: 'Tầng 5, tòa văn phòng CTM, số 299 đường Cầu Giấy, quận Cầu Giấy, Hà Nội', city: 'Hà Nội', district: 'Cầu Giấy', lat: 21.0333, lng: 105.7856, price_from: 1750000, rating: 4.9, reviews: 260, tags: ['HSK', 'Offline', 'Lớp tối'], schedule: ['Chiều', 'Tối'], phone: '0937333444', website: '', desc: 'Trung tâm tọa lạc tại Cầu Giấy, thuận tiện học buổi tối.' },
+
+            { id: 7, name: 'Trung tâm Hán Ngữ Thăng Long', address: '123 Nguyễn Huệ, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7722, lng: 106.6996, price_from: 1500000, rating: 4.8, reviews: 120, tags: ['HSK 1-6', 'Lớp tối'], schedule: ['Tối', 'Cuối tuần'], phone: '0901111222', website: 'https://thanglong.edu.vn', desc: 'Trung tâm có kinh nghiệm nhiều năm, cam kết đầu ra cho học viên.' },
+            { id: 8, name: 'Trung tâm Ngữ Văn Trung Hoa', address: '45 Láng Hạ, Q.Đống Đa, Hà Nội', city: 'Hà Nội', district: 'Đống Đa', lat: 21.0018, lng: 105.8201, price_from: 1800000, rating: 4.9, reviews: 95, tags: ['Giao tiếp', 'Học thử'], schedule: ['Sáng', 'Chiều', 'Tối'], phone: '0912222333', website: '', desc: 'Chú trọng giao tiếp thực hành với giáo viên bản ngữ và Việt Nam giàu kinh nghiệm.' },
+            { id: 9, name: 'Học viện Hán Ngữ Quốc Tế', address: '78 Trần Phú, Q.Hải Châu, Đà Nẵng', city: 'Đà Nẵng', district: 'Hải Châu', lat: 16.0606, lng: 108.2202, price_from: 1200000, rating: 4.7, reviews: 88, tags: ['Online/Offline', 'Cuối tuần'], schedule: ['Cuối tuần', 'Sáng'], phone: '0933333444', website: '', desc: 'Linh hoạt online và offline, phù hợp người đi làm.' },
+            { id: 10, name: 'Trung tâm Văn Hóa Trung Quốc', address: '200 Nguyễn Đình Chiểu, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7785, lng: 106.6860, price_from: 2000000, rating: 4.6, reviews: 102, tags: ['Giáo viên bản ngữ', 'Giao tiếp'], schedule: ['Chiều', 'Tối'], phone: '0944444555', website: '', desc: 'Tập trung vào giao tiếp và văn hóa, lớp học tương tác cao.' },
+            { id: 11, name: 'Trung tâm Hoa Ngữ Sài Gòn', address: '56 Lê Lợi, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7746, lng: 106.6992, price_from: 1300000, rating: 4.5, reviews: 60, tags: ['HSK', 'Lớp sáng'], schedule: ['Sáng'], phone: '0908555666', website: '', desc: 'Gói học tiết kiệm, phù hợp người mới bắt đầu.' },
+            { id: 12, name: 'Trung tâm Bắc Kinh', address: '88 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội', city: 'Hà Nội', district: 'Hoàn Kiếm', lat: 21.0285, lng: 105.8520, price_from: 1700000, rating: 4.4, reviews: 50, tags: ['HSK 1-4'], schedule: ['Chiều'], phone: '0987777888', website: '', desc: 'Lớp nhỏ, chú trọng luyện thi HSK và phát âm chuẩn.' },
+            { id: 13, name: 'Trung tâm Ngôn Ngữ Hoa Việt', address: '12 Bạch Đằng, Ngô Quyền, Hải Phòng', city: 'Hải Phòng', district: 'Ngô Quyền', lat: 20.8460, lng: 106.6881, price_from: 1000000, rating: 4.3, reviews: 34, tags: ['Cuối tuần'], schedule: ['Cuối tuần'], phone: '0966666777', website: '', desc: 'Phù hợp học viên khu vực Hải Phòng, lịch học cuối tuần linh hoạt.' },
+            { id: 14, name: 'Trung tâm Trung Hoa Đông Á', address: '10 Phan Chu Trinh, Hai Bà Trưng, Hà Nội', city: 'Hà Nội', district: 'Hai Bà Trưng', lat: 21.0095, lng: 105.8562, price_from: 1400000, rating: 4.6, reviews: 70, tags: ['HSK 1-6', 'Giao tiếp'], schedule: ['Tối', 'Sáng'], phone: '0975999111', website: '', desc: 'Chuyên luyện HSK và các khóa giao tiếp ngắn hạn.' },
+            { id: 15, name: 'Trung tâm Tiếng Trung Phương Đông', address: '34 Điện Biên Phủ, Thanh Khê, Đà Nẵng', city: 'Đà Nẵng', district: 'Thanh Khê', lat: 16.0544, lng: 108.2110, price_from: 1100000, rating: 4.2, reviews: 28, tags: ['HSK', 'Giáo dục định hướng'], schedule: ['Sáng', 'Chiều'], phone: '0919000111', website: '', desc: 'Giáo trình thực tế, nhiều lớp luyện nói.' },
+            { id: 16, name: 'Trung tâm Hoa Ngữ An Bình', address: '7 Lý Tự Trọng, Quận 1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7729, lng: 106.6959, price_from: 1600000, rating: 4.7, reviews: 80, tags: ['HSK', 'Luyện nói'], schedule: ['Chiều', 'Tối'], phone: '0901222333', website: '', desc: 'Lớp luyện nói chuyên sâu, giáo viên nhiều kinh nghiệm.' },
+            { id: 17, name: 'Trung tâm Minh Thắng', address: '22A Trần Quang Khải, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7710, lng: 106.6920, price_from: 1250000, rating: 4.3, reviews: 44, tags: ['Lớp tối', 'HSK'], schedule: ['Tối'], phone: '0902333444', website: '', desc: 'Lớp tối linh hoạt, đội ngũ trẻ và nhiệt huyết.' },
+            { id: 18, name: 'Trung tâm Hoa Sen', address: '90A Nguyễn Chí Thanh, TP. Vinh', city: 'Nghệ An', district: 'Vinh', lat: 18.6666, lng: 105.6833, price_from: 900000, rating: 4.1, reviews: 22, tags: ['HSK', 'Cuối tuần'], schedule: ['Cuối tuần'], phone: '0911222333', website: '', desc: 'Chi phí thấp phù hợp học viên sinh viên.' },
+            { id: 19, name: 'Trung tâm Bắc Âu', address: '5 Hàng Bài, Hoàn Kiếm, Hà Nội', city: 'Hà Nội', district: 'Hoàn Kiếm', lat: 21.0280, lng: 105.8525, price_from: 1450000, rating: 4.5, reviews: 55, tags: ['HSK', 'Giao tiếp'], schedule: ['Sáng', 'Chiều'], phone: '0922333444', website: '', desc: 'Lớp căn bản và giao tiếp, phù hợp mọi lứa tuổi.' },
+            { id: 20, name: 'Trung tâm Á Châu', address: '120B Hai Bà Trưng, Hà Nội', city: 'Hà Nội', district: 'Hai Bà Trưng', lat: 21.0100, lng: 105.8530, price_from: 1550000, rating: 4.6, reviews: 68, tags: ['Lớp tối', 'HSK'], schedule: ['Tối'], phone: '0933444555', website: '', desc: 'Lớp tối tập trung cho người đi làm.' },
+            { id: 21, name: 'Trung tâm Vạn Xuân', address: '3 Núi Thành, Hải Châu, Đà Nẵng', city: 'Đà Nẵng', district: 'Hải Châu', lat: 16.0630, lng: 108.2230, price_from: 1100000, rating: 4.0, reviews: 18, tags: ['HSK'], schedule: ['Sáng'], phone: '0944555666', website: '', desc: 'Giá tốt, phù hợp học viên địa phương.' },
+            { id: 22, name: 'Trung tâm Minh Anh', address: '88 Lê Duẩn, Q.1, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 1', lat: 10.7750, lng: 106.7000, price_from: 1350000, rating: 4.4, reviews: 48, tags: ['Giao tiếp'], schedule: ['Chiều', 'Tối'], phone: '0955666777', website: '', desc: 'Chú trọng nói và luyện phản xạ giao tiếp.' },
+            { id: 23, name: 'Trung tâm Học Vui', address: '44 Trần Phú, Hải Phòng', city: 'Hải Phòng', district: 'Ngô Quyền', lat: 20.8450, lng: 106.6890, price_from: 980000, rating: 4.2, reviews: 30, tags: ['Cuối tuần', 'HSK'], schedule: ['Cuối tuần'], phone: '0961222333', website: '', desc: 'Lịch học cuối tuần, phù hợp người bận rộn.' },
+            { id: 24, name: 'Trung tâm Đại Dương', address: '2 Võ Thị Sáu, Nha Trang', city: 'Khánh Hòa', district: 'Nha Trang', lat: 12.2388, lng: 109.1967, price_from: 1050000, rating: 4.1, reviews: 12, tags: ['HSK'], schedule: ['Sáng'], phone: '0971222333', website: '', desc: 'Phù hợp học viên tại Nha Trang muốn học tiếng Trung.' },
+            { id: 25, name: 'Trung tâm Hòa Bình', address: '18 Phạm Ngọc Thạch, Đà Lạt', city: 'Lâm Đồng', district: 'Đà Lạt', lat: 11.9404, lng: 108.4583, price_from: 950000, rating: 4.0, reviews: 9, tags: ['Giao tiếp'], schedule: ['Chiều'], phone: '0981222333', website: '', desc: 'Lớp nhỏ, dễ tiếp thu.' },
+            { id: 26, name: 'Trung tâm Sài Gòn Mới', address: '210C Điện Biên Phủ, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7790, lng: 106.6930, price_from: 1450000, rating: 4.5, reviews: 76, tags: ['HSK', 'Lớp tối'], schedule: ['Tối'], phone: '0902111222', website: '', desc: 'Lớp tối chất lượng, nhiều khóa luyện thi.' },
+            { id: 27, name: 'Trung tâm Đông Phương', address: '55A Cách Mạng Tháng 8, Q.3, TP.HCM', city: 'TP.Hồ Chí Minh', district: 'Quận 3', lat: 10.7780, lng: 106.6910, price_from: 1500000, rating: 4.6, reviews: 82, tags: ['Giáo viên bản ngữ'], schedule: ['Chiều', 'Tối'], phone: '0913111222', website: '', desc: 'Giáo viên bản ngữ, lớp tương tác cao.' },
+            { id: 28, name: 'Trung tâm Học Ngôn', address: '101 Lê Lợi, Buôn Ma Thuột', city: 'Đắk Lắk', district: 'Buôn Ma Thuột', lat: 12.6666, lng: 108.0500, price_from: 900000, rating: 4.1, reviews: 14, tags: ['HSK'], schedule: ['Sáng'], phone: '0931222333', website: '', desc: 'Trung tâm địa phương, giá phù hợp.' }
         ];
+
 
         const FAKE_BLOGS = [
             { id: 1, title: '5 bí quyết học tiếng Trung hiệu quả cho người mới bắt đầu', tag: 'Kinh nghiệm học', date: '15/01/2025', read: '5 phút đọc', author: 'Nguyễn Văn A', excerpt: 'Chia sẻ phương pháp, timeline và tài liệu cho người mới bắt đầu.' },
@@ -2421,6 +2562,56 @@
             } catch (e) { console.warn(e); }
         }
     </script>
+    <script>
+        /*
+          showPage(pageId)
+          - pageId: 'home' | 'blog' | 'centers' | 'community' | ...
+          - expects sections have ids: page-<pageId>, and all page sections use class="page-section"
+        */
+        function showPage(pageId) {
+            // 1) hide all page sections
+            document.querySelectorAll('.page-section').forEach(function (sec) {
+                if (!sec.classList.contains('hidden')) sec.classList.add('hidden');
+            });
+
+            // 2) show target
+            var target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.remove('hidden');
+
+                // 3) update active state in header tabs if exist (optional)
+                try {
+                    // clear active style on any tab buttons with ids tab-*
+                    document.querySelectorAll('[id^="tab-"]').forEach(function (btn) {
+                        btn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                        btn.classList.add('text-gray-600');
+                    });
+                    // add active to the matching tab if found (tab-blog or tab-community)
+                    var tabBtn = document.getElementById('tab-' + pageId);
+                    if (tabBtn) {
+                        tabBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                        tabBtn.classList.remove('text-gray-600');
+                    }
+                } catch (e) {
+                    // ignore
+                }
+
+                // 4) optional: scroll top of page and focus
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            } else {
+                console.warn('showPage: no element with id', 'page-' + pageId);
+            }
+        }
+
+        // Backwards-compat wrapper: if other code calls navigateTo(...)
+        if (typeof navigateTo === 'undefined') {
+            function navigateTo(p) { showPage(p); }
+        }
+    </script>
+    <script>
+        showPage('blog');
+    </script>
+
 </body>
 
 </html>
